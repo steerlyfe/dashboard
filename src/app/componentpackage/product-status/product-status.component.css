@@ -1,0 +1,136 @@
+.orderid {
+    padding: 16px;
+}
+.orderid span {
+    margin-left: 10px;
+}
+
+.orderid .orderstatus {}
+
+.orderid .orderstatus span {}
+
+.shippingaddress {
+    padding: 16px;
+}
+.productdiv .card .row{
+    margin:unset;
+}
+.productdiv .card .row .imageouterdiv {
+    width: 150px;
+    height: 150px;
+}
+
+.productdiv .card .row  .imageouterdiv .banner {
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    padding: 10px
+}
+.productdiv .card .row .productDetails {
+    padding: 10px;
+}
+.productdiv .card .row .productDetails h6{
+    background: linear-gradient( 178deg, #911FDD , #04BCB1, #007FD6 );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 11px;
+}
+.productdiv .card .row .productDetails span{
+    color: #808080bf;
+    font-size: 12px;
+}
+
+
+.ProgressBar {
+    margin: 0 auto;
+    padding: 4em 0 3em;
+    list-style: none;
+    position: relative;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-pack: justify;
+    justify-content: space-between;
+  }
+  
+  .ProgressBar-step {
+    text-align: center;
+    position: relative;
+    width: 100%;
+  }
+  .ProgressBar-step:before, .ProgressBar-step:after {
+    content: "";
+    height: 0.5em;
+    background-color: #9F9FA3;
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    left: -50%;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+            transform: translateY(-50%);
+    -webkit-transition: all .25s ease-out;
+    transition: all .25s ease-out;
+  }
+  .ProgressBar-step:first-child:before, .ProgressBar-step:first-child:after {
+    display: none;
+  }
+  .ProgressBar-step:after {
+    background-color: #007f00;
+    width: 0%;
+  }
+  .ProgressBar-step.is-complete + .ProgressBar-step.is-current:after, .ProgressBar-step.is-complete + .ProgressBar-step.is-complete:after {
+    width: 100%;
+  }
+  .ProgressBar-step.is-complete .tooltip {
+    display: none;
+  }
+  .ProgressBar-step.is-complete :hover .tooltip {
+    display: block;
+  }
+  
+  .ProgressBar-icon {
+    width: 1.5em;
+    height: 1.5em;
+    background-color: #9F9FA3;
+    fill: #9F9FA3;
+    border-radius: 50%;
+    padding: 0.5em;
+    max-width: 100%;
+    z-index: 10;
+    position: relative;
+    -webkit-transition: all .25s ease-out;
+    transition: all .25s ease-out;
+    cursor: pointer;
+  }
+  .is-current .ProgressBar-icon {
+    fill: #007f00;
+    background-color: #007f00;
+  }
+  .is-complete .ProgressBar-icon {
+    fill: #DBF1FF;
+    background-color: #007f00;
+  }
+  .is-complete .ProgressBar-icon:hover  .tooltip {
+    display: block;
+  }
+  
+  .ProgressBar-stepLabel {
+    display: block;
+    text-transform: capitalize;
+    color: #9F9FA3;
+    position: absolute;
+    padding-top: 0.5em;
+    width: 100%;
+    -webkit-transition: all .25s ease-out;
+    transition: all .25s ease-out;
+  }
+  .is-current > .ProgressBar-stepLabel, .is-complete > .ProgressBar-stepLabel {
+    color: #007f00;
+  }
+  
+  .wrapper {
+    max-width: 1000px;
+    margin: 4em auto;
+    font-size: 16px;
+  }
+

@@ -1,0 +1,80 @@
+
+<div class="container" *ngIf="isLoading">
+
+        <mat-card class="example-card">
+                <div class="buttondiv">
+                        <button type="submit" onClick="return false;"  [routerLink]="['/admin/add/product']">Add Product</button>
+                </div>
+            <mat-card-content>
+         
+
+                                <div class="table-responsive">
+                                        <table class="table table-hover">
+                                                <thead>
+                                                        <tr>
+                                                                <th>Sr.No</th>
+                                                                <th>Product Image</th>
+                                                                <th> Product Name</th>
+                                                                <th>Price</th>
+                                                                <th>Sale Price</th>
+                                                                <th>Status</th>
+                                                                <th class="textalign">Action</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody *ngIf="productLists.length > 0">
+                                                        <tr *ngFor="let productslist of productLists; let i = index">
+                                                                <td class="textalign">{{i+1}}</td>
+                                                                <td>
+                                                                        <div class="imageouterdiv"><img src="{{productslist.productImage}}" class="banner"></div></td>
+                                                                <!-- <td class="storename">{{productlist.name}}</td> -->
+                                                                <td class="product_Name">{{productslist.productName}}</td>
+                                                                <td class="textalign">{{productslist.actualPrice}}</td>
+                                                                <td class="textalign">{{productslist.salePrice}}</td>
+                                                                <td class="textalign">
+                                                                        <div class="actionbutton">
+                                                                                <button mat-raised-button matTooltip="edit"
+                                                                                [routerLink]="['/admin/update/product',productslist.productPublicId]"       >
+                                                                                        <mat-icon>clear</mat-icon>
+                                                                                </button>
+                                                                                <button mat-raised-button matTooltip="view"
+                                                                                [routerLink]="['/admin/product/details',productslist.productPublicId]" >
+                                                                                        <mat-icon>check</mat-icon>
+                                                                                </button>
+                                                                                <!-- <button mat-raised-button matTooltip="Delete"
+                                                                                        >
+                                                                                        <mat-icon>delete</mat-icon>
+                                                                                </button> -->
+                                                                        </div>
+
+                                                                </td>
+                                                                <td>
+                                                                        <div class="actionbutton">
+                                                                                <button mat-raised-button matTooltip="edit"
+                                                                                [routerLink]="['/admin/update/product',productslist.productPublicId]"       >
+                                                                                        <mat-icon>create</mat-icon>
+                                                                                </button>
+                                                                                <button mat-raised-button matTooltip="view"
+                                                                                [routerLink]="['/admin/product/details',productslist.productPublicId]" >
+                                                                                        <mat-icon>visibility</mat-icon>
+                                                                                </button>
+                                                                                <!-- <button mat-raised-button matTooltip="Delete"
+                                                                                        >
+                                                                                        <mat-icon>delete</mat-icon>
+                                                                                </button> -->
+                                                                        </div>
+                                                                </td>
+
+                                                        </tr>
+                                                </tbody>
+                                                <tbody *ngIf="productLists.length == 0">
+                                                        <tr>
+                                                                <td colspan="6" style="text-align:center">Data is not Available</td>
+        
+                                                        </tr>
+                                                </tbody>
+                                        </table>
+                                </div>
+
+            </mat-card-content>
+          </mat-card>
+    </div>

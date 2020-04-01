@@ -1,0 +1,71 @@
+<div class="container">
+        <mat-card class="example-card">
+      
+          <mat-card-content>
+            <form  >
+
+                <label class="cabinet center-block">
+                    <figure>
+                    <img src="{{addSubStoreModel.bannerurl}}" class="gambar img-responsive img-thumbnail" id="item-img-output" />
+                  <figcaption><i class="fa fa-camera"></i></figcaption>
+                 </figure>
+                <input type="file" class="item-img file center-block"  (change)="onSelectFile($event)" accept="image/*" name="file_photo"/>
+            </label>
+
+              <div class="floating-label">
+                <textarea placeholder="Description" type="text" id="description" row="5" autocomplete="off" name="description" required
+                  [(ngModel)]="addSubStoreModel.description"></textarea>
+                <label style="top: calc(50% - 26px);" for="description">Description</label>
+              </div>
+              <div class="floating-label">
+                <input placeholder="Address" type="text" id="address" autocomplete="off" name="address" required [(ngModel)]="addSubStoreModel.address"   autocorrect="off" autocapitalize="off" spellcheck="off"  #search>
+                <label for="address">Address</label>
+              </div>
+             
+              <!-- <div class="floating-label">
+                  <input style="    color: #989898;" placeholder="Latitude" type="text" id="latitude" autocomplete="off" name="latitude" required [(ngModel)]="addSubStoreModel.lat" disabled>
+                  <label for="latitude">Latitude</label>
+                </div>
+                <div class="floating-label">
+                    <input style="    color: #989898;" placeholder="Longitude" type="text" id="longitude" autocomplete="off" name="longitude" required [(ngModel)]="addSubStoreModel.lng"  disabled>
+                    <label for="longitude">Longitude</label>
+                  </div> -->
+                <div class="floating-label">
+                    <input placeholder="Phone Number" type="text" id="phonenumber" (keypress)="keyPress($event)" autocomplete="off" name="phonenumber" required [(ngModel)]="addSubStoreModel.phoneNumber" 
+                    maxlength="11">
+                    <label for="phonenumber">Phone Number</label>
+                  </div>
+                  <div class="floating-label">
+                      <input placeholder="Email" type="email" id="email" autocomplete="off" name="email" required [(ngModel)]="addSubStoreModel.email" >
+                      <label for="email">Email</label>
+                    </div>
+                    <div class="floating-label">
+                        <input [ngxTimepicker]="opentime" placeholder="Opening Time"  id="opentime" autocomplete="off" name="opentime" required [(ngModel)]="addSubStoreModel.openingTime"  [format]="12"  readonly  step="2">
+                        <label for="opentime">Opening Time</label>
+                        <ngx-material-timepicker #opentime></ngx-material-timepicker>
+                      </div>
+                      <div class="floating-label">
+                          <!-- <input placeholder="Closing Time" type="time" id="closingtime" autocomplete="off" name="closingtime" required [(ngModel)]="addSubStoreModel.closingTime" step="2" value="00:00:00" min="00:00:00" >
+                          <label for="closingtime">Closing Time</label> -->
+                          <input [ngxTimepicker]="closingtime" placeholder="Closing Time"  id="closingtime" autocomplete="off" name="closingtime" required [(ngModel)]="addSubStoreModel.closingTime"  [format]="12"  readonly step="2">
+                          <label for="closingtime">Closing Time</label>
+                          <ngx-material-timepicker #closingtime ></ngx-material-timepicker>
+                          
+                        </div>
+      
+      
+              <button type="submit" class="btn" (click)="addSubStoreApi()">Add</button>
+           
+            
+            </form>
+            <agm-map [latitude]='addSubStoreModel.lat' [longitude]='addSubStoreModel.lng' 
+            [zoom]="zoom"  [mapTypeControl]="true" [streetViewControl]="true" [rotateControl]="true"   [fullscreenControl]="true"   >
+            <agm-marker [latitude]="addSubStoreModel.lat" [longitude]="addSubStoreModel.lng" [markerDraggable]="true" 
+            (dragEnd)="markerDragEnd($event)"
+            ></agm-marker>
+            </agm-map>
+            
+      
+          </mat-card-content>
+        </mat-card>
+      </div>

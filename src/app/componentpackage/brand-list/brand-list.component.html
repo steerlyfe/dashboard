@@ -1,0 +1,109 @@
+<div class="container" *ngIf="isLoading == true">
+
+                <mat-card class="example-card">
+            
+                    <mat-card-content>
+                        <div class="categoriesButtons">
+            
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="buttondiv1 " *ngFor="let categorylist of categoriesList ;let i=index">
+                                        <button type="submit" class="" id="catregory_{{i}}" (click)="showCategoryAccodingList(i,categorylist.categoryId)">{{categorylist.categoryName}}
+                                        </button>
+                                    </div>
+                                </div>
+            
+                                <div class="col-md-9" style="    border-left: 1px dotted #dfdfdf;">
+                                    <!-- <div class="producttype">
+                                        <div class="row">
+                                                <button class="productactive" id="in_store" (click)="productType('in_store')"> In Store</button>
+                                                <button id="deliver_now" (click)="productType('deliver_now')">Deliver Now</button>
+                                                <button id="shipping" (click)="productType('shipping')">Shipping</button>
+                                        </div>
+                                      
+                                    </div> -->
+                                                <div class="imageloadingdiv" *ngIf="listisloading == false">
+                                                                <img src="assets/images/loading.svg" alt="">
+                                                            </div>
+                                    <div class="productList" *ngIf="listisloading == true"  scrollTracker (scrolled)="updateScrollPos($event)">
+                                                <div *ngIf="productsLits.length == 0"><span class="listisEmpty">Data is not Available</span></div>
+                                        <div class="row">
+                                            <div class="col-4" *ngFor="let productlist of productsLits; let productIndex = index;" style="margin-bottom:40px;">
+                                                <div class="card">
+                                                    <div class="card-body">
+                                                        <div class="imagediv">
+                                                            <img src="{{productlist.image_url}}" alt="">
+                                                        </div>
+                                                        <!-- <div class="textdiv" [ngClass]="{'marquee':productlist.product_name.length > 20}"> -->
+                                                        <div class="textdiv " >
+                                                            <h6  > 
+                                                                
+                                                                <span *ngIf="  28 > productlist.product_name.length || 30 > productlist.product_name.length">{{productlist.product_name}}</span>
+                                                                <marquee behavior="" direction="" *ngIf="productlist.product_name.length > 28">
+                                                                <span>{{productlist.product_name}}</span>
+                                                                </marquee>
+                                                            </h6>
+                                                        </div>
+                                                        <div class="textdiv">
+                                                            <h6> ( {{productlist.product_value}} {{productlist.unit_type}} )</h6>
+                                                        </div>
+                                                        <div class="textdiv">
+            
+                                                            <p>{{(productlist.sale_price + productlist.additional_feature_price ) | currency:'USD'}}
+                                                            </p><br>
+                                                            <p *ngIf="productlist.product_availability == 'deliver_now' "> Delivery Charges {{productlist.product_availability_price  | currency:'USD'}}
+                                                            </p>
+                                                            <p *ngIf="productlist.product_availability == 'shipping' ">Shipping Charges {{productlist.product_availability_price  | currency:'USD'}}
+                                                            </p>
+                                                        </div>
+            
+                                                    </div>
+                                                    <div class="card-footer">
+                                                        <div class="buttondiv1 " style="padding:unset;" id="addcartbutton_{{productIndex}}">
+            
+                                                            <button type="submit" (click)="addToCartFunction(productlist.product_id,productIndex,productlist.unit_type,productlist.product_value)">Add Cart
+                                                            </button>
+                                                        </div>
+                                                        <div style="width:100%;    padding: 8px;" class="quantity" id="isQuantity_{{productIndex}}">
+                                                            <div class="row " style="width: max-content;margin: unset;margin: auto;">
+            
+                                                                <div class="actionbuttonquantity">
+            
+                                                                    <button mat-raised-button matTooltip="Subtract Quantity" (click)="subtractQunatity(productIndex,'isQuantity_'+productIndex,productlist.product_id)">
+            
+                                                                        <mat-icon>remove</mat-icon>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="quantitydiv">
+                                                                    {{productlist.quantity}}
+                                                                </div>
+                                                                <div class="actionbuttonquantity">
+            
+                                                                    <button mat-raised-button matTooltip=" Add Quantity " (click)="addQuantity(productIndex,productlist.product_id)">
+                                                                        <mat-icon>add</mat-icon>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+            
+                                                </div>
+
+
+                                               
+                                            </div>
+                                            <div class="imageloadingdiv" style="position: relative;min-height: 0px" *ngIf="onscollLoading == true">
+                                                <img src="assets/images/loading.svg" alt="">
+                                            </div>
+                                        </div>
+                                       
+                                    </div>
+            
+                                </div>
+                            </div>
+            
+                        </div>
+            
+                    </mat-card-content>
+                </mat-card>
+            </div>

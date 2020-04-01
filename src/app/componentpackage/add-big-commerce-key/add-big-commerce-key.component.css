@@ -1,0 +1,13 @@
+.floating-label label {
+ 
+    top: calc(50% - 12px);
+    
+}
+input{
+    width: 100%;
+    max-width: 100%;
+}
+.floating-label {
+    
+    width: 100%;
+}

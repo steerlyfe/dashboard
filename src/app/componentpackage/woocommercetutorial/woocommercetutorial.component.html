@@ -1,0 +1,28 @@
+<div class="container" >
+
+    <mat-card class="example-card">
+         
+            <mat-card-content>
+                    <div class="topheadingstep" *ngFor="let tutorial of tutorialList;">
+                        <div class="row">
+                            <div class="stepperdiv">
+                                 
+                            </div>
+
+                            <div class="heading">
+                               <h4>{{tutorial.step}}</h4> 
+                            </div>
+                        </div>
+                        <div class=" imageandtext">
+                            <div class="image" >
+                                <img src="./assets/images/woocommerceImages/{{tutorial.image}}" alt="" style="width: 100%;">
+                            </div>
+                           <span >
+                                {{tutorial.caption}}
+                           </span>
+                        </div>
+                        
+                    </div>
+            </mat-card-content>
+    </mat-card>
+</div>

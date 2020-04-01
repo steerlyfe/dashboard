@@ -1,0 +1,140 @@
+<div class="container" *ngIf="isLoading">
+    <!-- <div class="container"> -->
+
+    <mat-card class="example-card">
+        <div class="buttondiv" *ngIf="accountType == 'admin' || accountType == 'manager' 
+            || accountType == 'sub_admin' || accountType == 'sub_manager'  ">
+            <button type="submit" onClick="return false;" *ngIf=" substoreButton == false" [routerLink]="['/'+accountType+'/create/post']">Create
+                New Post</button>
+            <button type="submit" onClick="return false;" *ngIf=" substoreButton == true" [routerLink]="['/'+accountType+'/create/sub-store/post/',getPostMOdal.subStoreAccountId]">Create
+                New Post</button>
+        </div>
+        <mat-card-content>
+
+            <!-- <div class="row imagerow " style="margin:unset;">
+                                <div class="col-md-3 imagerow" *ngFor="let categorylist of categoryList ;let i=index">
+                                        <div class="buttondiv1 " >
+                                                <button type="submit" class="" id="catregory_{{i}}" (click)="showCategoryAccodingList(i)">{{categorylist.categoryName}}
+                                                </button>
+                                            </div>
+                                </div>
+                               
+            
+            
+                            </div> -->
+
+
+            <div class="row">
+                <div class="col-md-4" style="border-right: 1px dotted #797777c9;">
+                    <!-- <div class="row">
+                        <div class="col-md-12" *ngFor="let categorylist of categoryList ;let i=index"> -->
+                    <div class="buttondiv1 " *ngFor="let categorylist of categoryList ;let i=index">
+                        <!-- <button type="submit"  id="catregory_{{i}}" (click)="showCategoryAccodingList(i)">{{categorylist.categoryName}}</button> -->
+                        <button type="submit" class="" id="catregory_{{i}}" (click)="showCategoryAccodingList(i,categorylist.categoryId)">{{categorylist.categoryName}}
+                        </button>
+                    </div>
+                    <!-- </div>
+                    </div> -->
+
+
+                </div>
+                <div class="col-md-8">
+                    <div class="row">
+                        <div class="imageloadingdiv" *ngIf="listisloading == false">
+                            <img src="assets/images/loading.svg" alt="">
+                        </div>
+                        <!-- <div style="position: relative; top: 0; right: 10px; width: 100px; background: beige">
+                            <strong>Current scroll position: </strong>{{curScrollPos}}<br/>
+                            <strong>End reached? </strong>{{ endReached ? 'yes': 'no' }}
+                          </div> -->
+                        <div class="userMAxHeight" *ngIf="listisloading == true" scrollTracker (scrolled)="updateScrollPos($event)">
+                            <div *ngIf="postsList.length == 0"><span class="listisEmpty">Data is not Available</span></div>
+                            <div class="col-md-12" *ngFor="let posteslist of postsList ;let i=index;">
+
+                                <div class="posts">
+                                    <div class="card">
+                                        <!-- *ngIf="listisloading == true" -->
+                                        <ks-carousel [id]="i" [images]="posteslist.image" [previewConfig]="{visible: false}"
+                                            [carouselConfig]="{maxWidth: '100% ', maxHeight: '270px ' ,
+                                                            objectFit: 'cover', keyboardEnable: true, modalGalleryEnable: false}"
+                                            [dotsConfig]="{visible: false}" class="card-img-top" [playConfig]="{autoPlay: false, interval: 5000, pauseOnHover: true}"
+                                            [infinite]="false">
+                                        </ks-carousel>
+
+
+                                        <div class="card-body">
+                                            <div style="width: 95%;
+                                            height: 50px;
+                                            position: absolute;
+                                            bottom: 0;">
+                                                <div class="leftpanel"> <span class="card-text">
+                                                        <H6 style="font-size: 13px;font-weight: unset">
+                                                            <mat-icon>visibility</mat-icon> {{posteslist.view}}
+                                                        </H6>
+                                                    </span></div>
+                                                <div class="rightpanel"> <span class="card-text">
+                                                        <!-- <mat-icon style="cursor: pointer;" [routerLink]="['/'+accountType+'/edit/post',posteslist.postPublicId]"
+                                                            *ngIf="accountType == 'admin' || accountType == 'manager' 
+                                                            || accountType == 'sub_admin' || accountType == 'sub_manager'  ">create</mat-icon> -->
+                                                        <mat-icon style="cursor: pointer;" *ngIf="accountType == 'admin' || accountType == 'manager' "
+                                                            [routerLink]="['/'+accountType+'/edit/post',posteslist.postPublicId]">create</mat-icon>
+                                                        <!-- <mat-icon style="cursor: pointer;" *ngIf="accountType == 'admin' || accountType == 'manager' 
+                                                            || accountType == 'sub_admin' || accountType == 'sub_manager' || accountType == 'super_admin'  ">delete</mat-icon> -->
+                                                        <a mat-raised-button matTooltip="Change Status" style="margin-left: 10px;"
+                                                            [ngStyle]="{'color':getColor(posteslist.status)}" (click)="changePostStatusFunction(posteslist.status,posteslist.postPublicId,content)"
+                                                            *ngIf="accountType == 'admin' || accountType == 'manager' 
+                                                            || accountType == 'sub_admin' || accountType == 'sub_manager' || accountType == 'super_admin'  ">
+                                                            {{currentStatusIcon}}
+
+                                                        </a>
+                                                    </span></div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="caption">
+                                        <p>{{posteslist.caption}}</p>
+                                    </div>
+                                    <div class="userinfo">
+                                        <div class="userimage">
+                                            <div class="mainimagediv">
+                                            <img src="{{posteslist.userImage}}" alt="Avatar" class="avatar">
+
+                                            </div>
+                                            <span>{{posteslist.username}}</span>
+                                            <!-- <span>{{posteslist.posTime}}</span>  -->
+                                        </div>
+
+                                        <span class="timeInfo">
+                                            {{posteslist.posTime | timeAgo}}
+                                            <!-- <time am-time-ago="posteslist.posTime" title="{{ posteslist.posTime | amDateFormat: 'dddd, MMMM Do YYYY, h:mm a' }}"></time> -->
+                                        </span>
+                                    </div>
+                                </div>
+                                <hr *ngIf="postsList.length-1 >i">
+                            </div>
+
+                            <div class="imageloadingdiv" style="position: relative;min-height: 0px" *ngIf="onscollLoading == true">
+                                <img src="assets/images/loading.svg" alt="">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </mat-card-content>
+    </mat-card>
+</div>
+<ng-template #content>
+    <div class="modal-body" style="text-align: center; ">
+        <p style="font-family: Arial;">{{dailogMessage}}</p>
+        <button class="modalbutton2" (click)="callChangeStatusApi()">Yes</button>
+        <button class="modalbutton2" (click)="JoinAndClose()">No</button>
+    </div>
+</ng-template>

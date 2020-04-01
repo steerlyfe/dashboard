@@ -1,0 +1,72 @@
+<div class="container">
+    <mat-card class="example-card">
+
+        <mat-card-content>
+            <form class="log-in" autocomplete="off">
+                <div class="floating-label">
+                    <input placeholder="Coupon Code" type="text" id="coupon_code" autocomplete="off" name="coupon_code" required [(ngModel)]="addPromoCode.coupon_code">
+                    <label for="coupon_code">Coupon Code</label>
+                </div>
+                <div class="floating-label">
+                    <input placeholder="Start time" type="datetime-local" id="start_time" autocomplete="off" name="start_time" required [(ngModel)]="couponStartTime" value="couponStartTime">
+                    <label for="start_time">Start time</label>
+                </div>
+                <div class="floating-label">
+                    <input placeholder="End time" type="datetime-local" id="end_time" autocomplete="off" name="end_time" required [(ngModel)]="couponEndTime" value="couponEndTime">
+                    <label for="end_time">End time</label>
+                </div>
+                <div class="floating-label">
+                    <select id="accounttype" name="accounttype" [(ngModel)]="addPromoCode.coupon_type" (change)="OnChangeCouponType(addPromoCode.coupon_type)">
+              <option selected="true" value="">Select coupon type</option>
+              <option  value="selected_products">Selected Products</option>
+              <option  value="all_products">All Products</option>
+            </select>
+                </div>
+                <mat-form-field style="    width: 100%;
+                              top: -14px; min-width: 100%;" *ngIf="showProductList">
+                    <mat-label>Select Product</mat-label>
+                    <mat-select multiple [(ngModel)]="productIds" [ngModelOptions]="{standalone: true}">
+                        <mat-option *ngFor="let  products of productList" [value]="products.productId">{{products.productName}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div class="floating-label">
+                    <select id="couponUsed" name="couponUsed" [(ngModel)]="addPromoCode.usedby_count_or_end_date" (change)="OnChangeCouponUsedType(addPromoCode.usedby_count_or_end_date)">
+              <option selected="true" value="">Select coupon used type </option>
+              <option value="count">Count</option>
+              <option  value="unlimited">Unlimited</option>
+            </select>
+                </div>
+                <div class="floating-label" *ngIf="showCountField">
+                    <input placeholder="Enter Count" type="text" id="count" autocomplete="off" name="count" required [(ngModel)]="addPromoCode.number_of_coupon">
+                    <label for="count">Enter number of coupon</label>
+                </div>
+                <div class="floating-label">
+                    <input placeholder="Enter coupon ammount limit" type="text" id="coupon_ammount_limit" autocomplete="off" name="coupon_ammount_limit" required [(ngModel)]="addPromoCode.more_then_amount">
+                    <label for="coupon_ammount_limit">Enter coupon amount limit</label>
+                </div>
+                <div class="floating-label">
+                    <select id="discountType" name="discountType" [(ngModel)]="addPromoCode.discount_type" (change)="OnChangeDiscountType(addPromoCode.discount_type)">
+            <option selected="true" value="">Select discount type </option>
+            <option value="amount">Amount</option>
+            <option  value="percentage">Percentage</option>
+          </select>
+                </div>
+                <div class="floating-label" *ngIf="amountDiscountType">
+                    <input placeholder="Enter Discount Amount" type="text" id="discount_amount" autocomplete="off" name="discount_amount" required [(ngModel)]="addPromoCode.discount_amount">
+                    <label for="discount_amount">Enter Discount Amount</label>
+                </div>
+                <div class="floating-label" *ngIf="percentageDiscountType">
+                    <input placeholder="Enter discount percentage" type="text" id="discount_percentage" autocomplete="off" name="discount_percentage" required [(ngModel)]="addPromoCode.discount_percentage">
+                    <label for="discount_percentage">Enter discount percentage</label>
+                </div>
+                <div class="floating-label" *ngIf="percentageDiscountType">
+                    <input placeholder="Enter discount percentage ammount" type="text" id="discount_percentage_ammount" autocomplete="off" name="discount_percentage_ammount" required [(ngModel)]="addPromoCode.discount_percentage_amount_upto">
+                    <label for="discount_percentage_ammount">Enter discount percentage ammount</label>
+                </div>
+                <button type="submit" (click)="addCoupon()" *ngIf="couponPublicId == undefined">Add Coupon</button>
+                <button type="submit" (click)="updateCouponApi()" *ngIf="couponPublicId != undefined">Update Coupon</button>
+            </form>
+
+        </mat-card-content>
+    </mat-card>
+</div>

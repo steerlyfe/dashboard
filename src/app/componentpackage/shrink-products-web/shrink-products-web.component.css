@@ -1,0 +1,105 @@
+.shrinkButton {
+    text-align: center;
+    padding: 20px;
+}
+
+table {
+    width: 100%;
+}
+
+td.mat-cell, td.mat-footer-cell, th.mat-header-cell {
+    text-align: center;
+    padding: 6px;
+}
+
+.afterSync {
+    padding: 25px;
+}
+
+.afterSync .mypagination {
+    text-align: end;
+}
+
+/* .afterSync .mypagination button{
+    width: 18px;
+    background: initial;
+    color: #000;
+    margin-left: 10px;
+    border: none;
+    box-shadow: none;
+    cursor: pointer;
+} */
+
+.actionbutton {
+    width: 100px;
+    float: right;
+}
+
+.actionbutton button {
+    height: 40px;
+    min-height: 40px;
+    min-width: 40px;
+    width: 40px;
+    padding: 0px;
+    -o-transition: all 250ms;
+    transition: all 260ms;
+    /* -webkit-backface-visibility: hidden;
+    backface-visibility: hidden; */
+    color: #ffffff;
+    border-radius: 100%;
+    margin: 2px;
+}
+
+.actionbutton button mat-icon {
+    font-size: 21px;
+    vertical-align: middle;
+}
+
+.actionbutton button:hover {
+    background: rgba(0, 0, 0, 0.1);
+    color: #000000;
+}
+
+.imageouterdiv{
+    width: 70px;
+    height: 70px;
+    
+    padding: 2px;
+    border-radius: 50%;
+    margin-right: 15px;
+    overflow: hidden;
+    margin: auto;
+    background: linear-gradient( 155deg, #911FDD , #04BCB1, #007FD6 );
+    background-color: white;
+}
+.banner{
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: contain;
+    background: #fff;
+}
+/* width: 100px;
+    float: unset;
+    margin: auto;
+    padding: 21px; */
+
+@media screen and (max-width: 360px) {
+    .actionbutton {
+        width: 100px;
+        float: unset;
+        margin: auto;
+        padding: 21px;
+    }
+}
+
+@media all and (min-width: 360px) and (max-width: 900px) {
+    .actionbutton {
+        width: 100px;
+        float: unset;
+        margin: auto;
+        padding: 21px;
+    }
+   
+}

@@ -1,0 +1,163 @@
+<div class="container" *ngIf="isLoading">
+    <mat-card class="example-card" style="margin:5px;">
+        <mat-card-content>
+
+            <div class="orderid">
+                <div class="row ">
+                    <div class="col-md-6">
+                        <div class="row ">
+                            <h6> Order No : </h6><span>{{OrderDetail.order_id}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row orderstatus ">
+                            <h6> Order Status : </h6><span [ngStyle]="{color:getColor(OrderDetail.orderStatus)}" style="text-transform:capitalize;">{{
+                                getOrderStatus(OrderDetail.orderStatus)}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="orderdate">
+                    <div class="row ">
+                        <h6> Order Date : </h6> <span>{{OrderDetail.order_time * 1000 | date:'dd-MMM-yyyy, h:mm a'}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="shippingaddress">
+
+                <div class="row ">
+                    <div class="col-md-12" style="    margin: inherit;">
+                        <div class="shippingAddress">
+                            <div class="row" style="    margin: unset;">
+                                <h6>Shipping Address :</h6>
+                                &nbsp;&nbsp; <span> {{OrderDetail.address_Details}}
+                                </span>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="producttable">
+
+
+                <div class="table-responsive">
+                    <!-- <table class="table table-hover"> -->
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Sr.No</th>
+                                <th></th>
+                                <th>Product Name</th>
+                                <th>Qunatity</th>
+                                <th>Total Price</th>
+                                <th>Seller Name</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody *ngFor="let products of productList ;let productindex=index;">
+
+                            <tr>
+
+
+                                <td>{{productindex+1}}</td>
+                                <td style="width: 10px;">
+                                    <div class="imageouterdiv"><img src="{{products.product_image}}" class="banner"></div>
+                                </td>
+                                <td>{{products.product_name}} ({{products.additional_feature}})</td>
+                                <td>{{products.quantity}}</td>
+                                <td>{{ (products.sale_price + products.additional_feature_price) * products.quantity |
+                                    currency:'USD'}}</td>
+                                <td>{{products.store_name}}</td>
+                                <td><span [ngStyle]="{color:getColor(products.producttsatus.currentStatus)}">{{
+                                        getOrderStatus(products.producttsatus.currentStatus) }}</span></td>
+
+
+                            </tr>
+
+                            <tr id="progressdiv_{{productindex}}">
+                                <td colspan="7" style="border-top:unset;border-bottom: 2px solid #dee2e6;">
+                                    <ol class="ProgressBar">
+
+                                        <!-- <li class="ProgressBar-step " *ngFor="let progresslist of products.producttsatus.logsList;let i=index; "
+                                            [ngClass]="{'is-complete':progresslist.value}" id="orderstatus" (click)="updateStatus(i,productindex,progresslist.type,content)"> -->
+                                        <li class="ProgressBar-step " *ngFor="let progresslist of products.producttsatus.logsList;let i=index; "
+                                            [ngClass]="{'is-complete':progresslist.value}" id="orderstatus">
+                                            <svg class="ProgressBar-icon"  (click)="updateStatus(i,productindex,progresslist.type,content)">
+                                                <use xlink:href="#checkmark-bold" />
+                                            </svg>
+
+                                            <span class="ProgressBar-stepLabel">{{ getOrderStatus(progresslist.type) }}</span>
+
+                                        </li>
+
+                                    </ol>
+                                    <div style="text-align: center;
+                                                   padding: 44px;
+                                                padding-left: 87px;
+                                                font-size: 12px;
+                                                color: #9f9fa3;">
+                                        <span [ngStyle]="{color:getColor(products.producttsatus.currentStatus)}">{{
+                                            getOrderStatus(products.producttsatus.currentStatus)}}</span><br>
+
+                                        <span>{{products.productstatusTime * 1000 | date:'dd-MMM-yyyy, h:mm a'}}</span>
+
+                                    </div>
+                                </td>
+                            </tr>
+
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+
+
+                <!-- <div class="grandtotaldiv">
+                
+                    <div class="row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                            <table class="table">
+                                <tbody>
+                                    <tr *ngIf="deliverBoolean">
+                                        <th>Delivery Charges</th>
+                                        <td>{{deliverValue | currency:'USD' }}</td>
+                                    </tr>
+                                    <tr *ngIf="shippingChargesBoolean">
+                                        <th>Shipping Charges</th>
+                                        <td>{{shippingValue | currency:'USD' }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th> Grand Total</th>
+                                        <td>{{OrderDetail.total_amount | currency:'USD'}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div> -->
+
+
+
+            </div>
+
+        </mat-card-content>
+    </mat-card>
+</div>
+
+
+
+<ng-template #content>
+    <div class="modal-body" style="text-align: center; ">
+        <p style="font-family: Arial;">{{dailogMessage}}</p>
+        <button class="modalbutton2" (click)="changeStatusApiCall()">continue</button>
+        <button class="modalbutton2" (click)= "JoinAndClose()">No</button>
+    </div>
+</ng-template>

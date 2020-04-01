@@ -1,0 +1,118 @@
+<div class="container" *ngIf="isLoading">
+    <mat-card class="example-card">
+  
+      <mat-card-content>
+        <!-- <div class="shrinkButton" *ngIf="dataSource.length == 0">
+          <button (click)="syncProductsFromWooCommerce()"> Sync Products</button>
+  
+        </div> -->
+        <div class="afterSync" *ngIf="dataSource.length !=0 ">
+          <div class="row">
+            <div class="col-md-6">
+              <button (click)="addTowebsite()"> Add Products</button>
+            </div>
+            <div class="col-md-6 mypagination">
+              <div class="actionbutton" >
+                <div class="row">
+                  <button mat-raised-button matTooltip="Go Previous" (click)="previous()"  [ngStyle]="{'visibility': visibilityConditionPrevious()}" >
+  
+                    <mat-icon style="
+                         padding-left: 6px;">arrow_back_ios</mat-icon>
+                  </button>
+                  <button mat-raised-button matTooltip="Go Next" (click)="next()"  [ngStyle]="{'visibility': visibilityConditionNext()}"   >
+                    <mat-icon>arrow_forward_ios</mat-icon>
+                  </button>
+                </div>
+  
+                <!-- <button mat-raised-button matTooltip="Delete"
+                                      >
+                                      <mat-icon>delete</mat-icon>
+                              </button> -->
+              </div>
+  
+  
+  
+  
+            </div>
+          </div>
+  
+        </div>
+  
+  
+  
+  
+  
+        <!-- <div class="table-responsive" *ngIf="listIsLOading"> -->
+        <div class="table-responsive">
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="dataSource.length !=0 ">
+  
+            <!-- Checkbox Column -->
+            <ng-container matColumnDef="select" style="text-align:start;">
+              <th mat-header-cell *matHeaderCellDef>
+                <mat-checkbox [(ngModel)]="allselected" (change)="checkAll($event,allselected)" [checked]="isAllChecked()">
+                  Select All
+                </mat-checkbox>
+              </th>
+              <td mat-cell *matCellDef="let row" style="text-align:start;width: 10px;">
+                <mat-checkbox [(ngModel)]="row.state" (change)="isCheckboxIsChecked(row.id,row.state)" [checked]="selection.isSelected(row.state)">
+                  <span *ngIf="row.already == true">Update</span>
+                  <span *ngIf="row.already === undefined">Add</span>
+                </mat-checkbox>
+              </td>
+            </ng-container>
+  
+            <!-- Position Column -->
+            <ng-container matColumnDef="sr_no">
+              <th mat-header-cell *matHeaderCellDef>Product Id </th>
+              <td mat-cell *matCellDef="let element; let i=index;"> {{element.id}} </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="product_image">
+              <th mat-header-cell *matHeaderCellDef>Product Image </th>
+              <td mat-cell *matCellDef="let element"> 
+
+                  <div class="imageouterdiv"><img src="{{element.images[0]}}"
+                    class="banner" *ngIf="element.images.length != 0"></div>
+                <!-- <img style=" width: 60px;border-radius: 100%;" src=""
+                  alt="" *ngIf="element.images.length != 0">  -->
+                
+                </td>
+            </ng-container>
+  
+            <ng-container matColumnDef="product_name">
+              <th mat-header-cell *matHeaderCellDef> Product Name </th>
+              <td mat-cell *matCellDef="let element" style="    max-width: 232px;
+                    width: 232px;
+                    white-space: nowrap;
+                    overflow: hidden;">
+                 
+                 <!-- {{element.name}} -->
+                    <span *ngIf="  28 > element.name.length || 30 > element.name.length">{{element.name}}</span>
+                    <marquee behavior="" direction="" *ngIf="element.name.length > 28">
+                    <span>{{element.name}}</span>
+                    </marquee>
+  
+              </td>
+            </ng-container>
+  
+  
+            <ng-container matColumnDef="product_price">
+              <th mat-header-cell *matHeaderCellDef> Price </th>
+              <td mat-cell *matCellDef="let element"> {{element.price | currency:'USD'}} </td>
+            </ng-container>
+  
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+            </tr>
+          </table>
+  
+        </div>
+  
+  
+      </mat-card-content>
+  
+  
+  
+  
+    </mat-card>
+  </div>

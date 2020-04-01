@@ -1,0 +1,195 @@
+<div class="container">
+    <mat-card class="example-card">
+
+        <mat-card-content>
+            <div class="row" style="    margin-bottom: 30px;
+            margin-top: 30px;">
+                <div class="col-md-10">
+
+                    <div class="force-to-the-bottom">
+                        <tag-input [ngModel]="tags" (onRemove)="onRemoved($event)" (onAdd)="onItemAdded($event)" style="padding: unset;">
+                            <tag-input-dropdown [showDropdownIfEmpty]="true" [dynamicUpdate]="false">
+                            </tag-input-dropdown>
+                        </tag-input>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button (click)="addTags()" style="padding: 10px 41px !important;">
+                            Add Tag
+                        </button>
+                </div>
+            </div>
+            <div class="productTable" style="margin-bottom: 13px;">
+                <!-- <div class="example-container mat-elevation-z8">
+                    <table mat-table [dataSource]="dataSource">
+                        <ng-container matColumnDef="Tag_name">
+                            <td mat-cell *matCellDef="let element" style="text-transform: capitalize;"> {{element.tagName}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="action">
+                            <td mat-cell *matCellDef="let element">
+                                <div class="actionbutton" style="width: 100%;">
+                                    <button mat-raised-button matTooltip="Delete Tag" (click)="deleteTagsKey(element.tagId,deleteTagcontent)">
+                                            <mat-icon>delete</mat-icon>
+                                    </button>
+                                </div>
+                            </td>
+                        </ng-container>
+                        <tr class="onhover" mat-row *matRowDef="let row; columns: displayedColumns;" (click)="clickOnRows()" style="cursor: pointer;"></tr>
+                    </table>
+                </div> -->
+                <div class="searchKey">
+                    <div class="row">
+                        <!-- <div class="col-1" > -->
+                        <div *ngFor="let tagslist of dataSource ;let i=index" id="tagdiv_{{i}}" class="searchtagdiv">
+                            <span style="  position: relative;
+                            top: -4px;" (click)="clickOnRows(tagslist.tagName,i)"> {{tagslist.tagName}}</span>
+                            <mat-icon (click)="deleteApiCall(tagslist.tagId)">clear</mat-icon>
+                        </div>
+                        <!-- </div> -->
+                    </div>
+                </div>
+
+            </div>
+            <hr>
+            <div class="searchKey" *ngIf="selectedByTag.length !=0  ">
+
+                <div class="row">
+                    <h5>Selected by tags</h5>
+                    <!-- <div class="col-2"> -->
+                    <div class="searchtagdiv" *ngFor="let selectedData of selectedByTag ;" style="cursor: pointer;">
+                        <span style="position: relative;
+                        top: -4px;"> {{selectedData}}</span>
+                        <mat-icon (click)="removeSelectedTag(selectedData)">clear</mat-icon>
+
+                    </div>
+                    <div class="searchButton">
+
+                        <mat-icon (click)="searchByProduct()">search</mat-icon>
+
+                    </div>
+                    <!-- </div> -->
+                </div>
+            </div>
+
+
+            <div class="tabsoption" *ngIf="selectedByTag.length !=0">
+                <div class="row">
+                    <div class="tabbutton">
+                        <button style="border-right: 1px solid #9c9c9c;" (click)="showProduct('active_product')" [ngClass]="{'active' : active_product}">Active Products</button>
+                        <button (click)="showProduct('inactive_product')" [ngClass]="{'active' : inactive_product}">Inactive Products</button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="productTable" style="margin-top: 13px;" *ngIf="selectedByTag.length !=0 ">
+
+                <div class="table-responsive">
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                                <th>Sr.No</th>
+                                <th>Product Image</th>
+                                <th> Product Name</th>
+                                <th class="textalign">Store Name</th>
+                                <th>Price</th>
+                                <th>Sale Price</th>
+                                <th>Status</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="tagProductList.length > 0">
+                            <tr *ngFor="let productslist of tagProductList; let i = index">
+                                <td class="textalign">{{i+1}}</td>
+                                <td>
+                                    <div class="imageouterdiv"><img src="{{productslist.productImage}}" class="banner"></div>
+                                </td>
+                                <!-- <td class="storename">{{productlist.name}}</td> -->
+                                <!-- <td class="product_Name  marquee"  > <span>{{productslist.productName}}</span></td> -->
+                                <!-- <td class="product_Name "  [ngClass]="{'marquee': productslist.productName.length > 20}" > <span>{{productslist.productName}}</span></td> -->
+                                <td class="product_Name ">
+                                    <span *ngIf="  24 > productslist.productName.length  || 30 > productslist.productName.length">{{productslist.productName}}</span>
+                                    <marquee *ngIf="productslist.productName.length > 28">
+                                        <span>{{productslist.productName}}</span></marquee>
+                                </td>
+                                <td class="product_Name ">
+                                    {{productslist.storeName}}
+                                </td>
+                                <td class="textalign">${{productslist.actualPrice}}</td>
+                                <td class="textalign">${{productslist.salePrice}}</td>
+                                <td *ngIf="accountType == 'admin' || accountType == 'manager' || accountType == 'super_admin'">
+
+                                    <div class="Userstatus">
+                                        <button mat-raised-button matTooltip="Chnage Status" [ngStyle]="{'background':getColor(productslist.currentStatus)}" (click)="accountStatus(productslist.currentStatus,productslist.productId,content)">
+                                                                    <mat-icon>{{currentStatusIcon}}</mat-icon>
+                                                                    <!-- <mat-icon>visibility_off</mat-icon> -->
+                                                            </button>
+                                    </div>
+                                </td>
+
+
+
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="tagProductList.length == 0">
+                            <tr>
+                                <td colspan="7" style="text-align:center">Data is not Available</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 
+            <div class="paggition">
+                    <button *ngIf="showpreviousButton" (click)="previous()">previous</button>
+                    <button *ngIf="shownextButton" (click)="next()">Next</button>
+            </div> -->
+            </div>
+
+        </mat-card-content>
+    </mat-card>
+</div>
+
+
+
+<!-- <ng-template #deleteTagcontent>
+    <div class="modal-body" style="text-align: center; ">
+        <div class="image">
+            !
+        </div>
+
+
+        <div class="textdiv">
+            <h6> Do you want to delete this tag ?</h6>
+        </div>
+        <div class="buttondiv">
+            <button class="  modalbutton2" (click)="deleteApiCall()">Delete</button>
+            <button class="  modalbutton2" (click)="JoinAndClose()">No</button>
+        </div>
+    </div>
+</ng-template> -->
+
+
+
+<ng-template #content>
+    <!-- <div class="modal-body" style="text-align: center; ">
+            <p style="font-family: Arial;"></p>
+            <button class="modalbutton2" (click)="changeStarusApiCall()">Yes</button>
+            <button class="modalbutton2" (click)="JoinAndClose()">No</button>
+    </div> -->
+    <div class="modal-body" style="text-align: center; ">
+        <div class="image">
+            !
+        </div>
+
+
+        <div class="textdiv">
+            <h6> {{dailogMessage}}</h6>
+        </div>
+        <div class="buttondiv">
+            <button class="  modalbutton2" (click)="changeStarusApiCall()">yes</button>
+            <button class="  modalbutton2" (click)="JoinAndClose()">No</button>
+        </div>
+    </div>
+</ng-template>

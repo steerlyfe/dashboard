@@ -1,0 +1,55 @@
+<div class="container">
+    <mat-card class="example-card">
+  
+      <mat-card-content>
+        <form class="log-in" autocomplete="off">
+          <div class="floating-label">
+            <input placeholder="Name" type="text" id="accountName" autocomplete="off" name="accountNAme" required
+              [(ngModel)]="addaccountmodel.accountName">
+            <label for="accountName">Name</label>
+          </div>
+          <div class="floating-label">
+            <input placeholder="Email" type="text" id="email" autocomplete="off" name="email" required [(ngModel)]="addaccountmodel.email">
+            <label for="email">Email</label>
+          </div>
+          <div class="floating-label">
+            <input placeholder="Password" type="password" id="password" autocomplete="off" name="pass" required
+              [(ngModel)]="addaccountmodel.password">
+            <label for="password">Password</label>
+            <div style="display: inline-block;position: absolute;right: 14px;top: 22px;">
+              <a style="height: 37px;border: unset;background: initial;color: #949aa2; cursor: pointer;" (click)="showPassword()"><span><i
+                    id="myicon" class="fa fa-eye-slash" aria-hidden="true"></i></span></a>
+            </div>
+          </div>
+          <div class="floating-label">
+            <input placeholder="Confirm Password" type="password" id="conpassword" autocomplete="off" name="conpass"
+              required [(ngModel)]="addaccountmodel.conPassword">
+            <label for="conpassword">Confirm Password</label>
+            <div style="display: inline-block;position: absolute;right: 14px;top: 22px;">
+              <a style="height: 37px;border: unset;background: initial;color: #949aa2; cursor: pointer;" (click)="showConfirmPassword()"><span><i
+                    id="myiconconfirm" class="fa fa-eye-slash" aria-hidden="true"></i></span></a>
+            </div>
+          </div>
+          <div class="floating-label" *ngIf="accountType == 'admin' && accountTypelist.length  != 0 
+          ||  accountType == 'sub_admin' && accountTypelist.length  != 0 ||
+          accountType == 'super_admin' && accountTypelist.length  != 0" >
+            <select id="accounttype" name="accounttype" [(ngModel)]="addaccountmodel.accountType">
+              <option selected="true" value="">Select Account Type</option>
+              <option *ngFor="let acounttype of accountTypelist" value="{{acounttype.value}}">{{acounttype.viewValue}}</option>
+            </select>
+  
+  
+            <label for="accounttype">Account Type</label>
+          </div>
+  
+  
+  
+    
+  
+          <button type="submit"  (click)="addAccount()">Update </button>
+          <!-- <button type="submit"  (click)="openDialog()">Add</button> -->
+        </form>
+  
+      </mat-card-content>
+    </mat-card>
+  </div>

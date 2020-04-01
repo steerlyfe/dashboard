@@ -1,0 +1,215 @@
+<!-- <div class="container" *ngIf="isLoading"> -->
+<div class="container" *ngIf="isLoading">
+
+    <mat-card class="example-card">
+
+        <mat-card-content>
+
+            <mat-horizontal-stepper #stepper [linear]="true" (selectionChange)="stepClick($event)">
+                <mat-step [completed]="false" [editable]="false">
+                    <ng-template matStepLabel>checkout</ng-template>
+                    <!-- <button mat-button matStepperNext>Next</button> -->
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Sr.No</th>
+                                    <th>Product Image</th>
+                                    <th> Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <!-- <th>Additional Price</th>
+                                    <th>Total price</th> -->
+                                    <th>Action</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="cartProductList.length > 0">
+
+                                <tr *ngFor="let cartlist of cartProductList; let cartindex = index">
+
+                                    <td class="textalign">{{cartindex+1}}</td>
+                                    <td>
+                                        <div class="imageouterdiv"><img src="{{cartlist.image_url}}" class="banner"></div>
+                                    </td>
+
+                                    <td class="product_Name">
+                                        <span *ngIf="  28 > cartlist.product_name.length || 30 > cartlist.product_name.length">
+                                                {{cartlist.product_name}}
+                                                ({{cartlist.product_value}}{{cartlist.unit_type}})
+                                        </span>
+                                        <marquee behavior="" direction="" *ngIf="cartlist.product_name.length > 28">
+                                            <span>{{cartlist.product_name}}
+                                                ({{cartlist.product_value}}{{cartlist.unit_type}})</span>
+                                        </marquee>
+                                    </td>
+                                    <td class="product_Name">
+                                        <div class="row" style="width: max-content;" style="width: 99px;margin: auto;">
+                                            <div class="actionbutton">
+
+                                                <button mat-raised-button matTooltip="Subtract Quantity" (click)="subtractQunatity(cartindex)">
+                                                    <mat-icon>remove</mat-icon>
+                                                </button>
+
+
+                                            </div>
+                                            <div class="quantitydiv">
+                                                {{cartlist.quantity}}
+                                            </div>
+                                            <div class="actionbutton">
+
+
+                                                <button mat-raised-button matTooltip=" Add Quantity " (click)="addQuantity(cartindex)">
+                                                    <mat-icon>add</mat-icon>
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <!-- <td class="product_Name">{{ (cartlist.sale_price +
+                                        cartlist.additional_feature_price) * cartlist.quantity | currency:'USD'}}</td> -->
+                                    <!-- <td class="product_Name">{{ cartlist.product_availability_price |  currency:'USD' }}</td> -->
+                                    <td class="product_Name">{{ (cartlist.sale_price + cartlist.additional_feature_price ) * cartlist.quantity | currency:'USD'}}</td>
+                                    <!-- <td class="product_Name">{{ ( cartlist.sale_price + cartlist.additional_feature_price) }} ,{{cartlist.additional_feature_price}} ,{{cartlist.quantity}}   </td> -->
+                                    <td class="product_Name">
+                                        <div class="actionbutton">
+
+
+                                            <button mat-raised-button matTooltip=" Add Quantity " (click)="removeItem(cartindex)">
+                                                <mat-icon>clear</mat-icon>
+                                            </button>
+
+                                        </div>
+
+                                    </td>
+
+
+                                </tr>
+
+
+                            </tbody>
+
+
+
+                            <tbody *ngIf="cartProductList.length == 0">
+                                <tr class="hidehover">
+                                    <td colspan="6" style="text-align:center;text-transform: none;">Product is not available into cart</td>
+
+                                </tr>
+                                <tr class="hidehover">
+                                    <td colspan="6" style="text-align:center;border: none;">
+                                        <div>
+                                            <button [routerLink]="['/'+accountType+'/shopping/list']">Continue Shopping</button>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="grandtotaldiv" *ngIf="cartProductList.length > 0">
+                        <!-- <div class="row" style="margin:unset;float: right;">
+                                <h6> Grand Total -</h6><span style="margin-left:20px;">$54</span>
+                        </div> -->
+                        <div class="row">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+                                <table class="table">
+                                    <tbody>
+
+                                        <tr>
+                                            <th> Grand Total</th>
+                                            <td>{{grandTotal| currency:'USD'}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttonCheckout" *ngIf="cartList.length > 0">
+                        <button type="submit" class="btn" (click)="clickOnCheckOut()">Checkout</button>
+                    </div>
+
+                </mat-step>
+                <mat-step [completed]="false" [editable]="false">
+                    <ng-template matStepLabel>Select Sub Stores</ng-template>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-form-field style="    width: 100%;
+                                          top: -14px; min-width: 100%;">
+                                <mat-label>Select Sub Store</mat-label>
+                                <mat-select [(ngModel)]="orderPlacedModal.substoreId" [ngModelOptions]="{standalone: true}">
+
+                                    <mat-option *ngFor="let  substorelist of substoreList" [value]="substorelist.subStoreId"><img style="    width: 50px; padding: 10px;border-radius: 100%;" src="{{substorelist.bannerUrl}}" alt="">{{substorelist.address}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="col-md-12" *ngIf="couponAppliedBoolean == false">
+                        <h6>Available Offers</h6>
+                        <div class="modallabel" *ngFor="let coupons of couponList;let i=index" (click)="CheckcouponWithOder(coupons.couponId)">
+                            <div *ngIf="coupons.discountType == 'amount'">
+                                <label style="width: 100%;" for=""> <span style=" font-size: 15px; ">{{coupons.discountAmount | currency:'USD'}} Rs off your order upto {{coupons.moreThenAmount | currency:'USD'}}</span></label>
+                                <label style="width: 100%;" for="">Use code  <span style=" font-size: 15px;">"{{coupons.couponCode}}"</span> to avail this offer</label>
+                            </div>
+                            <div *ngIf="coupons.discountType == 'percentage'">
+                                <label style="width: 100%;" for=""> <span style=" font-size: 15px; ">{{coupons.discountPercentage}} %  off your order upto {{coupons.moreThenAmount | currency:'USD'}}</span></label>
+                                <label style="width: 100%;" for="">Use code  <span style=" font-size: 15px;">"{{coupons.couponCode}}"</span> to avail this offer</label>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-12" *ngIf="couponAppliedBoolean == true">
+                        <div class="afterCouponIsApplied">
+                            Coupan applied
+                            <mat-icon style="    position: absolute;
+                            right: 13px; cursor: pointer;" (click)="removeCoupon()">clear</mat-icon>
+                        </div>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="grandtotaldiv" *ngIf="couponList.length > 0">
+
+                            <div class="row">
+                                <div class="col-md-6"></div>
+                                <div class="col-md-6">
+                                    <table class="table">
+                                        <tbody>
+
+                                            <tr *ngIf="couponAppliedBoolean == false">
+                                                <th> Grand Total</th>
+                                                <td>{{grandTotal| currency:'USD'}}</td>
+                                            </tr>
+                                            <tr *ngIf="couponAppliedBoolean == true">
+                                                <th>Total</th>
+                                                <td>{{grandTotal| currency:'USD'}}</td>
+                                            </tr>
+                                            <tr *ngIf="couponAppliedBoolean == true">
+                                                <th> Discount </th>
+                                                <td>{{discountValue| currency:'USD'}}</td>
+                                            </tr>
+                                            <tr *ngIf="couponAppliedBoolean == true">
+                                                <th>Grand Total</th>
+                                                <td>{{newGrandTotal| currency:'USD'}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="buttonCheckout">
+                        <!-- <button type="submit" class="btn" (click)="pressBack()" >Back</button> -->
+                        <button type="submit" class="btn" (click)="orderPlaceApiCall()">Order Placed</button>
+                    </div>
+                </mat-step>
+
+            </mat-horizontal-stepper>
+        </mat-card-content>
+    </mat-card>
+</div>

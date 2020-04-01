@@ -1,0 +1,248 @@
+<div class="container">
+  <mat-card class="example-card">
+    <mat-card-content>
+      <form class="log-in" autocomplete="off" style="padding:unset">
+        <!-- -->
+        <div class="imagediv">
+          <div class="imagedivbox" *ngIf="updateproduct.imageUrl.length > 0">
+            <div class="imageinsidediv">
+              <div class="row imagerow" style="margin:unset;">
+                <div *ngFor='let url of updateproduct.imageUrl' style="margin-top:12px;text-align: center;padding: 8px;">
+                  <div style="position: relative;box-shadow: 0px 0px 6px 4px #2222233b;
+    /* color: black; */border-radius: 5px;
+    width: 72px;height: 72px;transform: rotate(90deg);">
+                    <button class="btn" (click)="imageremove(url)" style=" z-index: 1;
+    right: 0px;
+    top: -7px;
+    "><i
+                        class="fa fa-times" aria-hidden="true"></i></button>
+                    <img [src]="url" style="width: 100%; height: 100%; position: relative;" />
+                  </div>
+                </div><br>
+              </div>
+            </div>
+          </div>
+          <div class="emptydiv" *ngIf="updateproduct.imageUrl.length == 0">
+            <h5>Add multiple product image</h5>
+          </div>
+          <input type="file" #fileImportInput name="File Upload" id="txtFileUpload" (change)="onSelectFile($event)"
+            accept="image/*" id="upload-photo" required  multiple style="margin-top: 13px; display: none;" />
+          <button class="savebutton" style="display:block; width: fit-content;margin: auto; " onclick="document.getElementById('upload-photo').click()">Product
+            Image</button>
+        </div>
+        <div style="width:100%">
+          <mat-card class="example-card mycard" style="width:100%">
+            <mat-card-content>
+              <div class="inputdiv" style="width:100%;">
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="floating-label">
+                      <input placeholder="Product Name" type="text" id="productname" autocomplete="off" name="productname"
+                        required [(ngModel)]="updateproduct.productName">
+                      <label for="productname">Product Name</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="floating-label">
+                      <input placeholder="Barcode" type="text" id="barcode" autocomplete="off" name="barcode"
+                        (keypress)="keyPress($event)" required [(ngModel)]="updateproduct.barcode">
+                      <label for="barcode">Barcode</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="floating-label">
+                      <textarea placeholder="Description" type="text" id="description" row="5" autocomplete="off" name="description"
+                        required [(ngModel)]="updateproduct.description"></textarea>
+                      <label style="top: calc(50% - 26px);" for="description">Description</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="floating-label">
+                      <input placeholder=" Price" type="text" id="actualPrice" autocomplete="off" name="actualPrice"
+                        (keypress)="isNumberKey(updateproduct.actualPrice, $event)" required [(ngModel)]="updateproduct.actualPrice">
+                      <label for="actualPrice"> Price</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="floating-label">
+                      <input placeholder="Sale Price" type="text" id="salePrice" autocomplete="off" name="salePrice"
+                        (keypress)="isNumberKey(updateproduct.salePrice, $event)" required [(ngModel)]="updateproduct.salePrice">
+                      <label for="salePrice">Sale Price</label>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+    
+                  <div class="col-md-12">
+                      <mat-form-field style=" width: 100%;
+                      top: -14px;">
+                      <mat-label>Category</mat-label>
+                      <mat-select multiple [(ngModel)]="categoryIds" [ngModelOptions]="{standalone: true}" selected="selected">
+                      <mat-option *ngFor="let categorylist of categoryList" [value]="categorylist.categoryId" >{{categorylist.categoryName}}</mat-option>
+                      </mat-select>
+                      </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="row" style="margin:unset">
+                      <div class="col-md-4" *ngFor="let buttonName of additionInformationbutton ; let i=index" style="padding: unset;">
+                        <button class="btn1" (click)="addInputfields(i)">
+                          {{buttonName.button_Name}}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12" *ngFor="let data of updateproduct.additionalOptionsList ; let i=index">
+                    <!-- <h1>{{data.type}} :- {{i}}</h1> -->
+                    <div class="colordiv">
+                      <button class="btn" (click)="removeColorInputfield(i)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="floating-label">
+                            <input placeholder="{{data.button_Name}}" type="text" id="input_field_{{i}}"
+                               autocomplete="off" name="input_field_{{i}}"
+                              required [(ngModel)]="data.inputfield">
+                            <label for="color_name_{{i}}">{{data.button_Name}}</label>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="floating-label">
+                            <input placeholder="Addition Price" type="text" id="addition_price_{{i}}" autocomplete="off"
+                              name="addition_price_{{i}}" (keypress)="isNumberKey(data.additionPrice, $event)" required [(ngModel)]="data.additionPrice">
+                            <label for="addition_price_{{i}}">Addition Price</label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="additionalInformation">
+                  <div class="row">
+                    <h4>Add Product Info <button mat-raised-button matTooltip="Add Additional Info" class="addinfobutton"
+                        (click)="addAdditionInfo()">
+                        <mat-icon style="margin:-8px;"> add</mat-icon>
+                      </button>
+                    </h4>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="colordiv" *ngFor="let additionInfo of updateproduct.additionInfolist; let i=index ">
+                      <div>
+                        <button class="btn" (click)="removeProductInfo(i)"><i class="fa fa-times" aria-hidden="true"></i></button>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <div class="floating-label">
+                              <input placeholder="Title" type="text" id="title_{{i}}" autocomplete="off" name="title_{{i}}"
+                                required [(ngModel)]="additionInfo.type" >
+                              <label for="title_{{i}}">Title</label>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="floating-label">
+                              <input placeholder="Info" type="text" id="info_{{i}}" autocomplete="off" name="info_{{i}}"
+                                required [(ngModel)]="additionInfo.value" >
+                              <label for="info_{{i}}">Info</label>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="additionalInformation">
+                    <h4 style="text-align: initial;">Product Availability 
+            </h4>
+                </div>
+
+                <div class="checkboxdiv">
+                  <div class="row">
+                    <div class="col-md-12" style="text-align:left;">
+                        <div class="checkboxstyle">
+                            <input style="width: max-content;min-width: max-content;" id="in_store" class="checkbox-custom"
+                              name="in_store" value="in_store" type="checkbox" (change)="productAvailabilityInstok(updateproduct.instock)"
+                              [(ngModel)]="updateproduct.instock" data-md-icheck>
+                            <label for="in_store" class="checkbox-custom-label"><a style="color: grey; text-decoration: none;">
+                                <p>
+                                  In-Store
+                                </p>
+                              </a>
+                            </label>
+                          </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                   <div class="col-md-6"  style="text-align:left;">
+                      <div class="checkboxstyle">
+                          <input style="width: max-content;min-width: max-content;" id="deliver_now" class="checkbox-custom"
+                            name="deliver_now" value="deliver_now" type="checkbox" (change)="productAvailability(updateproduct.deliver_now)"
+                            [(ngModel)]="updateproduct.deliver_now" data-md-icheck>
+                          <label for="deliver_now" class="checkbox-custom-label"><a style="color: grey; text-decoration: none;">
+                              <p>
+                                Deliver Now
+                              </p>
+                            </a>
+                          </label>
+                        </div>
+                   </div>
+                  <div class="col-md-6" *ngIf="isdeliver_nowdiv">
+                    <div class="floating-label">
+                      <input placeholder="Deliver Charges" type="text" id="deliver_charges" autocomplete="off" name="deliver_charges"
+                        required [(ngModel)]="updateproduct.deliver_charges" (keypress)="isNumberKey(updateproduct.deliver_charges, $event)">
+                      <label for="info">Deliver Charges</label>
+                    </div>
+                  </div>
+             
+                </div>
+                <div class="row">
+                  <div class="col-md-6" style="text-align:left;">
+                      <div class="checkboxstyle">
+                          <input style="width: max-content;min-width: max-content;" id="shipping" class="checkbox-custom"
+                            name="shipping" value="shipping" type="checkbox" (change)="productAvailabilityshipping(updateproduct.shipping)"
+                            [(ngModel)]="updateproduct.shipping" data-md-icheck>
+                          <label for="shipping" class="checkbox-custom-label"><a style="color: grey; text-decoration: none;">
+                              <p>
+                                Shipping
+                              </p>
+                            </a></label>
+                        </div>
+                  </div>
+                  <div class="col-md-6" *ngIf="isShipping">
+                    <div class="floating-label">
+                      <input placeholder="Shipping Charges" type="text" id="shipping_charges" autocomplete="off" name="shipping_charges"
+                        required [(ngModel)]="updateproduct.shippingcharges" (keypress)="isNumberKey(updateproduct.shippingcharges, $event)">
+                      <label for="info">Shipping Charges</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="row">
+    <div class="col-md-4">
+    <div class="errormessage">
+    <p *ngIf="updateproduct.errorMessage.length > 0" class="text-danger" style=" text-align: justify;
+    ">
+    {{updateproduct.errorMessage}}</p>
+    </div>
+    </div>
+    </div> -->
+              <div class="row">
+                <div class="col-md-12">
+                  <button type="submit" style="width: 100%" (click)="updateProductApi()">Update</button>
+                </div>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

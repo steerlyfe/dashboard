@@ -1,0 +1,121 @@
+<div class="container" *ngIf="isloading">
+
+  <mat-card class="example-card">
+
+    <mat-card-content>
+
+      <!-- <div class="row">
+        <div class="col-md-4" style="    margin: unset;
+          padding: unset;">
+          <div class="card" style="border: none;box-shadow: 0px 1px 7px 3px #2222233b;">
+            <button class="statusButton" style="background:green" mat-raised-button matTooltip="Change Status">
+              <mat-icon style="color:#ffff;font-size: 17px;">visibility</mat-icon>
+
+            </button>
+            <div class="row" style="margin: unset;padding: unset;">
+              <div class="imagediv" style="width: 115px;height: 115px;padding: 3px;">
+                <img style="width:100%;height: 100%;" src="https://firebasestorage.googleapis.com/v0/b/steerlyfe-e2405.appspot.com/o/store-logo%2F1579515287080?alt=media&token=f558c6da-58d1-4676-9138-7501cc3d70cd"
+                  alt="">
+              </div>
+              <div class="contentwrite" style="">
+                <h6 style="    text-align: justify;
+                       margin-top: 15px;    background: linear-gradient( 178deg, #911FDD , #04BCB1, #007FD6 );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;">product
+                  Name</h6><br>
+                <div class="actionbutton">
+                  <button mat-raised-button matTooltip="Add Accounts">
+                    <mat-icon>add</mat-icon>
+                
+                  </button>
+                  <button mat-raised-button matTooltip="View Accounts">
+                    <mat-icon>supervisor_account</mat-icon>
+                  </button>
+                  <button mat-raised-button matTooltip="View Products">
+                    <mat-icon>add</mat-icon>
+                  </button>
+                  <button mat-raised-button matTooltip="view Sub Stores">
+                    <mat-icon>store</mat-icon>
+                  </button>
+                  <button mat-raised-button matTooltip="View Posts">
+                    <mat-icon>burst_mode</mat-icon>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div> -->
+
+      <div class="row" *ngIf="storeList.length > 0">
+        <div style="width: 100%;">
+          <button class="btn active " (click)="selectedStroe()" id="store">Store</button>
+          <button class="btn" (click)="selectedBrand()" id="brand">Brand</button>
+        </div>
+      </div>
+
+    
+
+      <div class="row" *ngIf="storeList.length > 0">
+
+
+        <div class="col-lg-4" *ngFor="let storelists  of storeList ;let i of index ">
+          <mat-card class="example-card mycard">
+            <button class="statusButton" mat-raised-button matTooltip="Change Status" [ngStyle]="{'background':getColor(storelists.storeStatus)}"
+              (click)="changeStoreStatusFunction(storelists.storeStatus,storelists.storeAccountId,content)">
+              <mat-icon>{{currentStatusIcon}}</mat-icon>
+
+            </button>
+            <!-- <mat-card class="example-card mycard">
+                                  <button  mat-raised-button matTooltip="view"  [ngStyle]="{'background':getColor(accountslists.currentStatus)}" (click)="accountStatus(accountslists.currentStatus,accountslists.storeAccountId,content)">
+                                    <mat-icon>{{currentStatusIcon}}</mat-icon>
+                            </button> -->
+            <img mat-card-image src="{{storelists.imageUrl}}" alt="store Images">
+            <mat-card-content>
+              <p>
+                <mat-card-subtitle>{{storelists.storeName}}</mat-card-subtitle>
+              </p>
+            </mat-card-content>
+            <mat-card-actions>
+              <div class="row" style="padding:unset">
+         
+                    <button mat-button style="    padding-left: 11px;
+                    padding-right: 11px;" [routerLink]="[ '/'+accountType+'/add/accounts/',storelists.storeAccountId]">Add Admin</button>
+
+              
+           
+                    <button mat-button  style="    padding-left: 11px;
+                    padding-right: 11px;"  [routerLink]="['/'+accountType+'/view/accounts',storelists.storeAccountId]">View Store
+                      Admins</button>
+             
+                 
+              </div>
+             
+              <button mat-button [routerLink]="['/'+accountType+'/view/sub-stores',storelists.storeAccountId]">View
+                Sub Stores</button>
+              <button mat-button [routerLink]="['/'+accountType+'/view/all/products',storelists.storeAccountId]">Products
+                List</button>
+              <button mat-button [routerLink]="['/'+accountType+'/view/posts/list/',storelists.storeAccountId]">Posts
+                View</button>
+            </mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+      <mat-card class="example-card " style=" width: 100%;" *ngIf="storeList.length == 0">
+        <mat-card-content>
+          <p>
+            Data is not Available
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-card-content>
+  </mat-card>
+</div>
+<ng-template #content>
+  <div class="modal-body" style="text-align: center; ">
+    <p style="font-family: Arial;">{{dailogMessage}}</p>
+    <button class="modalbutton2" (click)="changeStarusApiCall()">Yes</button>
+    <button class="modalbutton2" (click)="JoinAndClose()">No</button>
+  </div>
+</ng-template>

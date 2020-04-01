@@ -1,0 +1,96 @@
+<div class="container" *ngIf="isLoading">
+    <mat-card class="example-card" style="margin:5px;">
+        <mat-card-content>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="card mycard active" [ngClass]="{'active' : activeCardTotal}" (click)="getList('all')">
+                        <h1>{{total_count}}</h1>
+                        <h6>Total Orders</h6>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card mycard" [ngClass]="{'active' : activeCardcomplete}" (click)="getList('completed')">
+                        <h1>{{total_complete}}</h1>
+                        <h6>Completed Orders</h6>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card mycard" [ngClass]="{'active' : activeCardpending}" (click)="getList('pending')">
+                        <h1>{{total_pending}}</h1>
+                        <h6>Pending Orders</h6>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card mycard" [ngClass]="{'active' : activeCancelled}" (click)="getList('cancelled')">
+                        <h1>{{total_cancel}}</h1>
+                        <h6>Cancelled Orders</h6>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="ordertable">
+                <div class="table-responsive">
+                    <!-- <table class="table table-hover"> -->
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Sr.No</th>
+                                <th>Order Number</th>
+                                <th>Store Name</th>
+                                <!-- <th>Address</th> -->
+                                <th>Order Date</th>
+                                <th>Order Time</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+
+                            </tr>
+                        </thead>
+                        <tbody *ngIf="storeOrderList.length != 0 && isTableLoading == true ">
+                            <tr *ngFor="let orders of storeOrderList; let i=index" [routerLink]="['/'+accountType+'/store/order/detail/',orders.web_order_public_id]">
+                                <td>{{i+1}}</td>
+                                <td>{{orders.order_id}}</td>
+                                <td>{{orders.name}}</td>
+                                <!-- <td>{{orders.address}}</td> -->
+                                <td>{{orders.order_time * 1000 | date}}</td>
+                                <td>{{orders.order_time * 1000 | date:'shortTime'}}</td>
+                                <td>{{orders.total_amount | currency:'USD'}}</td>
+                                <td [ngStyle]="{'color':getColor(orders.order_status)}">{{orders.order_status}}</td>
+
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="storeOrderList.length == 0 && isTableLoading == true">
+                            <tr>
+                                <td colspan="7" style="text-align:center">Data is not Available</td>
+
+                            </tr>
+                        </tbody>
+                        <tbody *ngIf="isTableLoading == false">
+                            <tr>
+                                <td colspan="7" style="text-align:center">
+                                    <div class="imageloadingdiv" style="position: relative;min-height: 0px">
+                                        <img src="assets/images/loading.svg" alt="">
+                                    </div>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="paggition">
+                    <button *ngIf="showpreviousButton" (click)="previous()">previous</button>
+                    <button *ngIf="shownextButton" (click)="next()">Next</button>
+                </div>
+            </div>
+
+        </mat-card-content>
+    </mat-card>
+</div>
+<!-- <ng-template #content>
+        <div class="modal-body" style="text-align: center; ">
+                <p style="font-family: Arial;">{{dailogMessage}}</p>
+                <button class="modalbutton2" (click)="clearArray()">continue</button>
+                <button class="modalbutton2" (click)="JoinAndClose()">No</button>
+        </div>
+      </ng-template> -->

@@ -1,0 +1,210 @@
+form {
+    padding-top: 30px;
+    align-items: end;
+    /* width: max-content; */
+}
+
+button:focus {
+    outline: unset;
+}
+
+.floating-label label {
+    /* position: absolute; */
+    top: calc(50% - 12px);
+}
+
+.errormessage {
+    /* padding-left: 27px; */
+}
+
+label.cabinet {
+    display: block;
+    cursor: pointer;
+    position: absolute;
+    width: 156px;
+    height: 158px;
+    margin-bottom: 30px;
+    background: linear-gradient( 155deg, #911FDD, #04BCB1, #007FD6);
+    padding: 2px;
+    margin: auto;
+    top: 85px;
+    left: -140px;
+    z-index: 1;
+    border-radius: 4px;
+}
+
+label.cabinet input.file {
+    position: absolute;
+    opacity: 0;
+    -moz-opacity: 0;
+    width: 10px;
+    top: 0;
+    height: 100%;
+    right: 0;
+    width: 100px;
+    min-width: 100px;
+    cursor: pointer;
+}
+
+.floating-label {
+    width: fit-content;
+    margin-top: 19px;
+}
+
+.img-thumbnail {
+    padding: unset;
+    border: unset;
+    height: 153px;
+    border-radius: 6px;
+}
+
+#upload-demo {
+    width: 250px;
+    height: 250px;
+    padding-bottom: 25px;
+}
+
+figure figcaption {
+    position: absolute;
+    bottom: 0;
+    color: #fff;
+    width: 100%;
+    padding-left: 9px;
+    padding-bottom: 5px;
+    text-shadow: 0 0 10px #000;
+    text-align: justify;
+}
+
+.row {
+    width: 100%;
+}
+
+.inputcol {
+    padding: 25px;
+}
+
+.buttoncol {
+    margin: auto;
+    padding-bottom: 30px;
+}
+
+.imagecol {
+    margin: auto;
+    padding: 24px;
+}
+
+.btn {
+    width: auto;
+    border: none;
+    margin: 0px;
+    text-align: center;
+    padding: 15px 40px;
+    margin-top: 5px;
+    border: none;
+    background: transparent;
+    color: #000;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0px 2px 6px -1px rgba(0, 0, 0, 0.13);
+    transition: none !important;
+    outline: 0;
+}
+
+.active {
+    background: linear-gradient( 155deg, #911FDD, #04BCB1, #007FD6);
+    border: #fff;
+    color: #fff;
+}
+
+.mycard {
+    width: 432px;
+    /* padding: 53px;
+    text-align: -webkit-center;
+    box-shadow: 3px 3px 12px 6px #2222233b;
+    border-bottom-left-radius: 57px;
+    border-top-right-radius: 57px; */
+    padding: 40px;
+}
+
+.text-danger {
+    color: red;
+    text-align: justify;
+}
+
+@media screen and (max-width: 360px) {
+    input {
+        min-width: 200px;
+    }
+    form {
+        padding: unset;
+        padding-bottom: 30px;
+        text-align: -webkit-center;
+        text-align: -moz-center;
+    }
+    label.cabinet {
+        margin-left: unset;
+    }
+    figure figcaption {
+        text-align: left;
+    }
+    label.cabinet {
+        position: absolute;
+        top: -132px;
+        left: 63px;
+        width: 150px;
+        height: 150px;
+    }
+    .mycard {
+        width: 288px;
+        margin-top: 150px;
+        padding: 27px;
+    }
+    .img-thumbnail {
+        padding: unset;
+        border: unset;
+        height: 145px;
+        border-radius: 6px;
+    }
+    .myrow {
+        transform: translate(0px, 6px);
+    }
+}
+
+@media all and (min-width: 360px) and (max-width: 1000px) {
+    input {
+        min-width: 200px;
+    }
+    form {
+        padding: unset;
+        padding-bottom: 30px;
+        text-align: -webkit-center;
+        text-align: -moz-center;
+    }
+    label.cabinet {
+        margin-left: unset;
+    }
+    figure figcaption {
+        text-align: left;
+    }
+    label.cabinet {
+        position: absolute;
+        top: -132px;
+        left: 63px;
+        width: 150px;
+        height: 150px;
+    }
+    .mycard {
+        width: 288px;
+        margin-top: 150px;
+        padding: 27px;
+    }
+    .img-thumbnail {
+        padding: unset;
+        border: unset;
+        height: 145px;
+        border-radius: 6px;
+    }
+    .myrow {
+        transform: translate(0px, 6px);
+    }
+}

@@ -1,0 +1,61 @@
+<div class="container">
+    <mat-card class="example-card">
+  
+        <mat-card-content>
+            <form class="log-in" autocomplete="off" > 
+               
+              
+                <div style="width: 100%;
+                text-align: -webkit-center;">
+             
+ <!-- <div class="col-lg-4 imagecol"> -->
+
+<!-- </div> -->
+<!-- <div class="col-lg-8 inputcol"> -->
+    <mat-card class="example-card mycard" >
+        <mat-card-content>
+                <label class="cabinet center-block">
+                        <figure>
+                        <img src="{{storemodal.imageUrl}}" class="gambar img-responsive img-thumbnail" id="item-img-output" />
+                      <figcaption><i class="fa fa-camera"></i></figcaption>
+                     </figure>
+                    <input type="file" class="item-img file center-block"  (change)="onSelectFile($event)" accept="image/*" name="file_photo"/>
+                </label>
+  <div class="row">
+    <div style="width: 100%;">
+        <button class="btn " (click)="selectedStroe()" id="store">Store</button>
+        <button class="btn" (click)="selectedBrand()" id="brand">Brand</button>
+    </div>
+    
+  </div>
+    <div class="floating-label" *ngIf="buttonclick">
+        <input placeholder="Store Name" type="text" id="storename" autocomplete="off" name="storename" required
+        [(ngModel)]="storemodal.storeName" >
+        <label for="storename">Store Name</label>
+      </div>
+      <div class="floating-label" *ngIf="buttonstoreclick">
+        <input placeholder="Brand Name" type="text" id="brandname" autocomplete="off" name="brandname" required
+        [(ngModel)]="storemodal.storeName" >
+        <label for="brandname">Brand Name</label>
+      </div>
+      <!-- <div class="errormessage" style="    margin-top: 27px;" >
+          <p class="text-danger">
+            {{storemodal.errorMessage}}
+             </p>
+        </div> -->
+    <button type="submit" onClick="return false;" style="    margin-top: 18px;" (click)="addStoreApi()"  >{{buttonName}}</button>
+      </mat-card-content>     
+  </mat-card>
+
+           
+                 
+                   
+                    
+                  </div>
+                    </form>
+                  
+        </mat-card-content>
+      </mat-card>
+</div>
+
+

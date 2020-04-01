@@ -1,0 +1,5 @@
+.floating-label label {
+ 
+    top: calc(50% - 12px);
+    
+}

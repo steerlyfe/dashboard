@@ -1,0 +1,97 @@
+
+.topHeading{
+    text-align:center;
+    padding: 10px;
+}
+.topHeading h4{
+    background: linear-gradient( 178deg, #911FDD , #04BCB1, #007FD6 );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+  .tutorial{
+    text-align: end;
+    padding: 11px;
+    color: #000;
+    font-size: 13px;
+  }
+  .tutorial a{
+      cursor: pointer;
+      color: #000;
+  }
+  .tutorial a:hover{
+      color: #007FD6;
+      text-decoration:underline;
+  }
+
+.table-hover tbody .hidehover:hover {
+    color:unset;
+    background-color: initial;
+}
+
+.keyname{
+    max-width: 126px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.modal.fade .modal-dialog {
+    width: 600px !important;
+}
+
+/* .modal.fade .modal-dialog {
+    width: 600px !important;
+} */
+.modal-body .buttondiv{
+    text-align: center;
+    margin: 14px
+}
+
+.modal-body .buttondiv .modalbutton2{
+    background: #fff;
+    color: #000;
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #00000061;
+}
+.modal-body .textdiv h6{
+    padding: 10px;
+    text-align: center;
+    text-transform: inherit;
+    font-size: 16px;
+}
+.modal-body .image{
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #d0382d;
+    border-color: #d0382d;
+    font-size: 60px;
+    line-height: 80px;
+    text-align: center;
+    border: 1px solid;
+    width: 70px;
+    border-radius: 100%;
+    margin: auto
+}
+
+.actionbutton  button{
+    height: 40px;
+    min-height: 40px;
+    min-width: 40px;
+    width: 40px;
+    padding: 0px;
+    -o-transition: all 250ms;
+    transition: all 260ms;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 100%;
+    background: initial;
+    margin: 2px;
+}
+.actionbutton button mat-icon{
+    font-size: 21px;
+    vertical-align: middle;
+}
+.actionbutton button:hover{
+    background: rgba(0,0,0,0.1);
+    
+}

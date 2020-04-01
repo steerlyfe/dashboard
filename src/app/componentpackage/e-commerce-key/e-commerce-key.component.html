@@ -1,0 +1,359 @@
+<!-- <div class="container" > -->
+<div class="container" *ngIf="isLoading">
+
+        <mat-card class="example-card">
+                <!-- <div class="buttondiv" *ngIf="accountType == 'admin' || accountType == 'manager' 
+            || accountType == 'sub_admin' || accountType == 'sub_manager' ">
+                    <button type="submit" onClick="return false;" [routerLink]="['/'+accountType+'/add/product']">Add Product</button>
+            </div> -->
+                <mat-card-content>
+                        <div style="width:100%">
+                                <div class="topHeading">
+                                        <h4> WooCommerce</h4>
+                                </div>
+                                <div class="tutorial">
+                                                <a [routerLink]="['/'+accountType+'/tutorial/add/woocommerce/key']"> Need Help to generate key ?</a>
+                                </div>
+                                <div class="table-responsive">
+                                        <table class="table">
+                                                <thead>
+                                                        <tr>
+                                                                <!-- <th>Sr.No</th> -->
+                                                                <th>Consumer Key</th>
+                                                                <th>Consumer Secret</th>
+                                                                <th>Create Time</th>
+                                                                <th>Update Time</th>
+                                                                <!-- <th>Status</th> -->
+                                                                <th>Action</th>
+                                                                <th>Add Products</th>
+                                                                <!-- <th>Tutorial</th> -->
+
+                                                        </tr>
+                                                </thead>
+                                                <tbody *ngIf="woocommerceLIst.length > 0">
+                                                        <tr *ngFor="let wooCommerceKeyList of woocommerceLIst; let i = index">
+                                                                <!-- <td class="textalign">{{i+1}}</td> -->
+                                                                <td class="keyname" >
+                                                                        
+                                                                        <div style="padding-right: 3px;">
+                                                                                        <span *ngIf="  20 > wooCommerceKeyList.consumerKey.length">{{wooCommerceKeyList.consumerKey}}</span>
+                                                                                        <marquee behavior="" direction="" *ngIf="wooCommerceKeyList.consumerKey.length > 20">
+                                                                                        <span>{{wooCommerceKeyList.consumerKey}}</span>
+        
+                                                                                        </marquee>
+                                                                                </div>
+                                                                </td>
+                                                                <!-- <td class="keyname" [ngClass]="{'marquee': wooCommerceKeyList.consumerSecret.length > 20}"> -->
+                                                                <td class="keyname">
+                                                                        <!-- <span>{{wooCommerceKeyList.consumerSecret}}</span> -->
+                                                                        <div style="padding-left: 3px;">
+                                                                                        <span *ngIf="  20 > wooCommerceKeyList.consumerSecret.length">{{wooCommerceKeyList.consumerSecret}}</span>
+                                                                                        <marquee behavior="" direction="" *ngIf="wooCommerceKeyList.consumerSecret.length > 20">
+                                                                                        <span>{{wooCommerceKeyList.consumerSecret}}</span>
+        
+                                                                                        </marquee>
+                                                                                </div>
+                                                                </td>
+                                                                <td>
+                                                                        <span>{{wooCommerceKeyList.createdTime *1000 |
+                                                                                date:'dd-MMM-yyy ,hh:mm a'}}</span>
+                                                                </td>
+                                                                <td>
+                                                                        <span>{{wooCommerceKeyList.updateTime *1000 |
+                                                                                date:'dd-MMM-yyy ,hh:mm a'}}</span>
+                                                                </td>
+                                                                <!-- <td>    
+                                                                <span>{{wooCommerceKeyList.currentStatus}}</span>
+                                                    </td> -->
+
+
+                                                                <td>
+                                                                        <div class="actionbutton" style="width: 100%;">
+                                                                                <!-- <mat-icon style="cursor: pointer;" [routerLink]="['/'+accountType+'/edit/post'">create</mat-icon> -->
+                                                                                <button mat-raised-button matTooltip="Edit Key"
+                                                                                        [routerLink]="['/'+accountType+'/edit/Woo-Commerce/key/',wooCommerceKeyList.publicId]">
+                                                                                        <mat-icon>create</mat-icon>
+                                                                                </button>
+                                                                                <button mat-raised-button matTooltip="Delete Key"
+                                                                                        (click)="delteWoocommerceKey(wooCommerceKeyList.id,deleteKeycontent)">
+                                                                                        <mat-icon>delete</mat-icon>
+                                                                                </button>
+
+                                                                                <!-- <mat-icon style="cursor: pointer;">create</mat-icon>
+                                                                        <mat-icon style="cursor: pointer;" >delete</mat-icon> -->
+
+                                                                        </div>
+                                                                </td>
+                                                                <td>
+                                                                        <div class="actionbutton" style="width: 100%;">
+                                                                                <button mat-raised-button matTooltip="Add Products"
+                                                                                        [routerLink]="['/'+accountType+'/sync/products/',wooCommerceKeyList.publicId]">
+                                                                                        <mat-icon>add</mat-icon>
+                                                                                </button>
+                                                                              
+                                                                        </div>
+
+
+
+                                                                </td>
+                                                                <!-- <td>
+                                                                        <div class="actionbutton" style="width: 100%;">
+                                                                               
+                                                                                <button mat-raised-button matTooltip="How to generate woocommerce key"
+                                                                                        [routerLink]="['/'+accountType+'/tutorial/add/woocommerce/key']">
+                                                                                        <mat-icon>help</mat-icon>
+                                                                                </button>
+
+                                                                         
+
+                                                                        </div>
+                                                                </td> -->
+
+                                                        </tr>
+                                                </tbody>
+
+                                                <tbody *ngIf="woocommerceLIst.length ==  0">
+                                                        <tr class="hidehover">
+                                                                <td colspan="6" style="text-align:center;text-transform: none;">No
+                                                                        data found with this store id</td>
+
+                                                        </tr>
+                                                        <tr class="hidehover">
+                                                                <td colspan="6" style="text-align:center;border: none;">
+                                                                        <div>
+                                                                                <button [routerLink]="['/'+accountType+'/add/Woo-Commerce/key']">Add
+                                                                                        Key</button>
+                                                                        </div>
+                                                                </td>
+
+                                                        </tr>
+                                                </tbody>
+
+
+                                        </table>
+                                </div>
+                        </div>
+                        <!-- <div style="width:100%">
+                                <div class="topHeading">
+                                        <h4> Shopify</h4>
+                                </div>
+                                <div class="table-responsive">
+                                        <table class="table ">
+                                                <thead>
+                                                        <tr>
+                                                                <th>Sr.No</th>
+                                                                <th>Consumer Key</th>
+                                                                <th>Consumer Secret</th>
+                                                                <th>Create Time</th>
+                                                                <th>Update Time</th>
+                                                                
+                                                                <th>Action</th>
+
+                                                        </tr>
+                                                </thead>
+                                                <tbody *ngIf="shopifyList.length > 0">
+                                                        <tr *ngFor="let shopifyListKeyList of shopifyList; let i = index">
+                                                                <td class="textalign">{{i+1}}</td>
+                                                                <td class="keyname" [ngClass]="{'marquee': shopifyListKeyList.consumerKey.length > 20}">
+                                                                        <span>{{shopifyListKeyList.consumerKey}}</span>
+                                                                </td>
+                                                               
+                                                                <td class="keyname" >
+                                                                        <div style="margin: 3px;">
+                                                                                <marquee behavior="" direction="">
+                                                                                <span>{{shopifyListKeyList.consumerSecret}}</span>
+
+                                                                                </marquee>
+                                                                        </div>
+                                                                </td>
+                                                                <td>
+                                                                        <span>{{shopifyListKeyList.createdTime *1000 |
+                                                                                date:'dd-MMM-yyy ,hh:mm a'}}</span>
+                                                                </td>
+                                                                <td>
+                                                                        <span>{{shopifyListKeyList.updateTime *1000 |
+                                                                                date:'dd-MMM-yyy ,hh:mm a'}}</span>
+                                                                </td>
+            
+
+
+                                                                <td>
+                                                                        <div class="actionbutton" style="width: 100%;">
+                                                                              
+                                                                                <button mat-raised-button matTooltip="Edit Key">
+                                                                                        <mat-icon>create</mat-icon>
+                                                                                </button>
+                                                                                <button mat-raised-button matTooltip="Delete Key"
+                                                                                        (click)="delteWoocommerceKey(shopifyListKeyList.id,deleteKeycontent)">
+                                                                                        <mat-icon>delete</mat-icon>
+                                                                                </button>
+
+
+
+                                                                        </div>
+                                                                </td>
+
+                                                        </tr>
+                                                </tbody>
+
+                                                <tbody *ngIf="shopifyList.length ==  0">
+                                                        <tr class="hidehover">
+                                                                <td colspan="6" style="text-align:center;text-transform: none;">No
+                                                                        data found with this store id</td>
+
+                                                        </tr>
+                                                        <tr class="hidehover">
+                                                                <td colspan="6" style="text-align:center;border: none;">
+                                                                        <div>
+                                                                                <button [routerLink]="['/'+accountType+'/add/Shopify/key']">Add
+                                                                                        Key</button>
+                                                                        </div>
+                                                                </td>
+
+                                                        </tr>
+                                                </tbody>
+
+
+                                        </table>
+                                </div>
+                        </div> -->
+                        <div style="width:100%">
+                                <div class="topHeading">
+                                        <h4> BigCommerce</h4>
+                                </div>
+                                <div class="table-responsive">
+                                        <table class="table ">
+                                                <thead>
+                                                        <tr>
+                                                                <!-- <th>Sr.No</th> -->
+                                                                <th>Consumer Key</th>
+                                                                <th>Consumer Secret</th>
+                                                                <th>Create Time</th>
+                                                                <th>Update Time</th>
+                                                                <!-- <th>Status</th> -->
+                                                                <th>Action</th>
+                                                                <th>Syn Products</th>
+
+                                                        </tr>
+                                                </thead>
+                                                <tbody *ngIf="bigCommerceList.length > 0">
+                                                        <tr *ngFor="let bigCommerceListKeyList of bigCommerceList; let i = index">
+                                                                <!-- <td class="textalign">{{i+1}}</td> -->
+                                                                <td class="keyname">
+                                                                       
+
+                                                                        <span *ngIf="  20 > bigCommerceListKeyList.consumerKey.length">{{bigCommerceListKeyList.consumerKey}}</span>
+                                                                        <marquee behavior="" direction="" *ngIf="bigCommerceListKeyList.consumerKey.length > 20">
+                                                                        <span>{{bigCommerceListKeyList.consumerKey}}</span>
+
+                                                                        </marquee>  
+
+                                                                </td>
+                                                                <td class="keyname">
+                                                                        <!-- <span>{{bigCommerceListKeyList.consumerSecret}}</span> -->
+                                                                        <span *ngIf="  20 > bigCommerceListKeyList.consumerSecret.length">{{bigCommerceListKeyList.consumerSecret}}</span>
+                                                                        <marquee behavior="" direction="" *ngIf="bigCommerceListKeyList.consumerSecret.length > 20">
+                                                                        <span>{{bigCommerceListKeyList.consumerSecret}}</span>
+
+                                                                        </marquee>  
+                                                                </td>
+                                                                <td>
+                                                                        <span>{{bigCommerceListKeyList.createdTime
+                                                                                *1000 |
+                                                                                date:'dd-MMM-yyy ,hh:mm a'}}</span>
+                                                                </td>
+                                                                <td>
+                                                                        <span>{{bigCommerceListKeyList.updateTime *1000
+                                                                                |
+                                                                                date:'dd-MMM-yyy ,hh:mm a'}}</span>
+                                                                </td>
+                                                                <!-- <td>    
+                                                                <span>{{bigCommerceListKeyList.currentStatus}}</span>
+                                                    </td> -->
+
+
+                                                                <td>
+                                                                        <div class="actionbutton" style="width: 100%;">
+                                                                                <!-- <mat-icon style="cursor: pointer;" [routerLink]="['/'+accountType+'/edit/post'">create</mat-icon> -->
+                                                                                <button mat-raised-button matTooltip="Edit Key" [routerLink]="['/'+accountType+'/edit/BigCommerce/key/',bigCommerceListKeyList.publicId]">
+                                                                                        <mat-icon>create</mat-icon>
+                                                                                </button>
+                                                                                <button mat-raised-button matTooltip="Delete Key"
+                                                                                        (click)="delteWoocommerceKey(bigCommerceListKeyList.id,deleteKeycontent)">
+                                                                                        <mat-icon>delete</mat-icon>
+                                                                                </button>
+
+                                                                                <!-- <mat-icon style="cursor: pointer;">create</mat-icon>
+                                                                        <mat-icon style="cursor: pointer;" >delete</mat-icon> -->
+
+                                                                        </div>
+                                                                </td>
+                                                                <td>
+                                                                        <div class="actionbutton" style="width: 100%;">
+                                                                             
+                                                                                <button mat-raised-button matTooltip="Add Products"
+                                                                                        [routerLink]="['/'+accountType+'/sync/products/bigcommerce/',bigCommerceListKeyList.publicId]">
+                                                                                        <mat-icon>add</mat-icon>
+                                                                                </button>
+                                                                        </div>
+
+
+
+                                                                </td>
+
+                                                        </tr>
+                                                </tbody>
+
+                                                <tbody *ngIf="bigCommerceList.length ==  0">
+                                                        <tr class="hidehover">
+                                                                <td colspan="6" style="text-align:center;text-transform: none;">No
+                                                                        data found with this store id</td>
+
+                                                        </tr>
+                                                        <tr class="hidehover">
+                                                                <td colspan="6" style="text-align:center;border: none;">
+                                                                        <div>
+                                                                                <button [routerLink]="['/'+accountType+'/add/BigCommerce/key']">Add
+                                                                                        Key</button>
+                                                                        </div>
+                                                                </td>
+
+                                                        </tr>
+                                                </tbody>
+
+
+                                        </table>
+                                </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+                </mat-card-content>
+        </mat-card>
+</div>
+
+
+
+<ng-template #deleteKeycontent>
+        <div class="modal-body" style="text-align: center; ">
+                <div class="image">
+                        !
+                </div>
+
+
+                <div class="textdiv">
+                        <h6> Do you want to delete this key ?</h6>
+                </div>
+                <div class="buttondiv">
+                        <button class="  modalbutton2" (click)="deleteApiCall()">Delete</button>
+                        <button class="  modalbutton2" (click)="JoinAndClose()">No</button>
+                </div>
+        </div>
+</ng-template>

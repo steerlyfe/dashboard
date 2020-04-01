@@ -1,0 +1,140 @@
+<div class="container" *ngIf="isLoading">
+
+        <mat-card class="example-card">
+                <div class="buttondiv" *ngIf="accountType == 'admin' || accountType == 'manager' 
+                || accountType == 'sub_admin' || accountType == 'sub_manager' ">
+                        <button type="submit" onClick="return false;" [routerLink]="['/'+accountType+'/add/product']">Add
+                                Product</button>
+                </div>
+                <mat-card-content>
+
+
+                        <div class="table-responsive">
+                                <table class="table ">
+                                        <thead>
+                                                <tr>
+                                                        <th>Sr.No</th>
+                                                        <th>Product Image</th>
+                                                        <th> Product Name</th>
+                                                        <th>Price</th>
+                                                        <th>Sale Price</th>
+                                                        <th *ngIf="accountType == 'admin' || accountType == 'manager' || accountType == 'super_admin'">Status</th>
+                                                        <th class="textalign">Action</th>
+                                                        <th class="textalign" *ngIf=" accountType == 'sub_admin' || accountType == 'sub_manager' || accountType == 'sub_employee'">Add
+                                                                Stock</th>
+                                                </tr>
+                                        </thead>
+                                        <tbody *ngIf="productLists.length > 0">
+                                                <tr *ngFor="let productslist of productLists; let i = index">
+                                                        <td class="textalign">{{i+1}}</td>
+                                                        <td>
+                                                                <div class="imageouterdiv"><img src="{{productslist.productImage}}"
+                                                                                class="banner"></div>
+                                                        </td>
+                                                        <!-- <td class="storename">{{productlist.name}}</td> -->
+                                                        <!-- <td class="product_Name  marquee"  > <span>{{productslist.productName}}</span></td> -->
+                                                        <!-- <td class="product_Name "  [ngClass]="{'marquee': productslist.productName.length > 20}" > <span>{{productslist.productName}}</span></td> -->
+                                                        <td class="product_Name ">
+                                                                <span *ngIf="  22 > productslist.productName.length  || 30 > productslist.productName.length">{{productslist.productName}}</span>
+                                                                <marquee *ngIf="productslist.productName.length > 22">
+                                                                        <span>{{productslist.productName}}</span></marquee>
+                                                        </td>
+                                                        <td class="textalign">${{productslist.actualPrice}}</td>
+                                                        <td class="textalign">${{productslist.salePrice}}</td>
+                                                        <td *ngIf="accountType == 'admin' || accountType == 'manager' || accountType == 'super_admin'">
+
+                                                                <div class="Userstatus">
+                                                                        <button mat-raised-button matTooltip="Chnage Status"
+                                                                                [ngStyle]="{'background':getColor(productslist.currentStatus)}"
+                                                                                (click)="accountStatus(productslist.currentStatus,productslist.productPublicId,content)">
+                                                                                <mat-icon>{{currentStatusIcon}}</mat-icon>
+                                                                                <!-- <mat-icon>visibility_off</mat-icon> -->
+                                                                        </button>
+                                                                </div>
+                                                        </td>
+                                                        <td>
+                                                                <div class="actionbutton" style="width: 100px;">
+                                                                        <button mat-raised-button matTooltip="Edit Product"
+                                                                                [routerLink]="['/'+accountType+'/update/product',productslist.productPublicId]"
+                                                                                *ngIf="accountType == 'admin' || accountType == 'manager' || accountType == 'sub_admin' 
+                                                                                || accountType == 'sub_manager' ">
+                                                                                <mat-icon>create</mat-icon>
+                                                                        </button>
+                                                                        <button mat-raised-button matTooltip="View Product"
+                                                                                [routerLink]="['/'+accountType+'/product/details',productslist.productPublicId]">
+                                                                                <mat-icon>art_track</mat-icon>
+                                                                        </button>
+                                                                        <!-- <button mat-raised-button matTooltip="Delete"
+                                                                                        >
+                                                                                        <mat-icon>delete</mat-icon>
+                                                                                </button> -->
+                                                                </div>
+                                                        </td>
+                                                        <td *ngIf=" accountType == 'sub_admin' || accountType == 'sub_manager' || accountType == 'sub_employee'">
+                                                                <div class="actionbutton">
+
+                                                                        <button mat-raised-button matTooltip="Add Stock"
+                                                                                (click)="AddStockDailog(productslist.productPublicId,addstock)">
+                                                                                <mat-icon>add</mat-icon>
+                                                                        </button>
+                                                                </div>
+                                                        </td>
+
+                                                </tr>
+                                        </tbody>
+                                        <tbody *ngIf="productLists.length == 0">
+                                                <tr>
+                                                        <td colspan="7" style="text-align:center">Data is not Available</td>
+
+                                                </tr>
+                                        </tbody>
+                                </table>
+                        </div>
+
+                        <div class="paggition">
+                                <button *ngIf="showpreviousButton" (click)="previous()">previous</button>
+                                <button *ngIf="shownextButton" (click)="next()">Next</button>
+                        </div>
+
+                </mat-card-content>
+        </mat-card>
+</div>
+<ng-template #content>
+        <div class="modal-body" style="text-align: center; ">
+                <p style="font-family: Arial;">{{dailogMessage}}</p>
+                <button class="modalbutton2" (click)="changeStarusApiCall()">Yes</button>
+                <button class="modalbutton2" (click)="JoinAndClose()">No</button>
+        </div>
+</ng-template>
+<ng-template #addstock style="max-width:unset;padding: unset;">
+        <div class="modal-header">
+                <h4 class="modal-title">Add Stock</h4>
+
+        </div>
+        <div class="modal-body" style="text-align: center; ">
+                <!-- <p style="font-family: Arial;">{{dailogMessage}}</p> -->
+                <form class="log-in" autocomplete="off" style="padding:unset">
+                        <div *ngFor="let addstock of additionStockList;let i=index" style="width: 100%;">
+
+                                <div style="width: 100%;">
+                                        <!-- {{i}} -->
+                                        <label for="" style=" width: 100%;
+                                text-align: justify;
+                                font-weight: bold;">{{addstock.value}}{{addstock.unitType}}</label>
+                                        <div class="floating-label">
+                                                <input placeholder="Enter Stcok" type="text" id="addstcok_{{i}}"
+                                                        autocomplete="off" name="addstock_{{i}}" required [(ngModel)]="addstock.stock"
+                                                        [value]="addstock.stock" [ngModelOptions]="{ standalone: true }"
+                                                        (keypress)="keyPress($event)">
+                                                <label for="salePrice">Enter Stock</label>
+                                        </div>
+                                </div>
+                        </div>
+                </form>
+        </div>
+
+        <div class="modal-footer" style="padding:unset">
+                <button class="modalbutton2" (click)="AddStockApiCall()">Add Stock</button>
+                <button class="modalbutton2" (click)="JoinAndClose()">Cancel</button>
+        </div>
+</ng-template>

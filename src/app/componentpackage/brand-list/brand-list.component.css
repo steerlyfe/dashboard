@@ -1,0 +1,283 @@
+.categoriesButtons {}
+
+.categoriesButtons .productList {
+    overflow: auto;
+    width: 100%;
+    max-height: 739px;
+}
+
+.categoriesButtons .productList::-webkit-scrollbar {
+    width: 0 !important
+}
+
+.categoriesButtons .productList {
+    overflow: -moz-scrollbars-none;
+}
+
+.categoriesButtons .productList .row {
+    margin: unset;
+}
+
+.categoriesButtons .buttondiv1 {
+    padding: 15px;
+}
+
+.categoriesButtons .buttondiv1 button {
+    width: 100%;
+    background: initial;
+    color: black;
+    border: 1px solid #00000085;
+}
+
+.active {
+    background: linear-gradient( 155deg, #911FDD, #04BCB1, #007FD6) !important;
+    border: #fff !important;
+    color: #fff !important;
+}
+
+.actionbuttonquantity button {
+    height: 30px;
+    min-height: 30px;
+    min-width: 30px;
+    width: 30px;
+    padding: 0px;
+    -o-transition: all 250ms;
+    transition: all 260ms;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 100%;
+    background: initial;
+    margin: 2px;
+}
+
+.actionbuttonquantity button mat-icon {
+    font-size: 17px;
+    vertical-align: middle;
+}
+
+.actionbuttonquantity button:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.quantitydiv {
+    width: 30px;
+    height: 30px;
+    /* padding-top: 6px; */
+    border: 1px solid #ddd;
+    text-align: center;
+    padding-top: 3px;
+    margin-top: 4px;
+    border-radius: 17%;
+    color: #000000a6;
+}
+
+.quantity {
+    display: none;
+}
+
+.cartbutton {
+    display: none
+}
+
+.categoriesButtons .card {
+    width: 100%;
+    min-height: 299px;
+}
+
+.categoriesButtons .imagediv {
+    width: 100%;
+    height: 160px;
+}
+
+.categoriesButtons .imagediv img {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+}
+
+.categoriesButtons .textdiv {
+    text-align: center;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.categoriesButtons .textdiv h6 {
+    margin-top: 10px;
+}
+
+.categoriesButtons .textdiv p {
+    color: gray;
+}
+
+.categoriesButtons .productList .card-footer {
+    padding: unset;
+    background: initial;
+}
+
+.categoriesButtons .productList .card-footer .buttondiv1 button {
+    border: none;
+    border-radius: unset;
+    height: 100%;
+    margin: unset;
+}
+
+.imageloadingdiv{
+    min-width: 100%;
+    min-height: 270px;
+    
+}
+.imageloadingdiv img{
+    width: 60px;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.listisEmpty{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.producttype{
+    padding: 10px;
+}
+.producttype .row{
+   
+    width: max-content;
+    margin: auto !important;
+    
+}
+.producttype .row button{
+    background: inherit;
+    color: #000;
+    border: none;
+    width: 125px;
+    box-shadow: none;
+    padding: 13px;
+    border-radius: unset;
+}
+
+.productactive{
+    border-radius: unset;
+    border-bottom: 1px solid #000 !important;
+}
+.marquee span {
+
+    line-height: 14px;
+  
+}
+
+/* .row{
+    width:100%;
+    margin-left: unset;
+    margin-right: unset;
+    padding: 28px;
+}
+.mat-card-image {
+    width: calc(100% + 32px);
+    height: 200px;
+    margin: 0 -16px 16px -16px;
+}
+.mat-card-actions, .mat-card-content, .mat-card-subtitle {
+    display: block;
+    margin-bottom: 16px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+}
+.col-lg-4{
+    margin-bottom: 40px;
+}
+.pagging button{
+    padding: 9px 23px;
+    margin:10px;
+}
+.mycard:hover{
+    box-shadow: 0 2px 8px 0px rgb(126, 46, 214), 0 2px 6px 0 rgb(3, 185, 178), 0 4px 17px 0 hsl(203, 100%, 41%);
+    cursor: pointer;
+}
+@media screen and (max-width: 360px) {
+    .buttondiv{
+        text-align: center;
+    }
+}
+@media all and (min-width: 360px) and (max-width: 900px) {
+    .buttondiv{
+        text-align: center;
+    }
+    .buttondiv  button{
+        width: 100%;
+    }
+} */
+
+.buttondiv {
+    text-align: right;
+    padding: 25px;
+}
+
+.buttondiv button:focus {
+    outline: unset;
+}
+
+.imageouterdiv {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.banner {
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.storename {
+    text-transform: capitalize;
+}
+
+.table td, .table th {
+    vertical-align: middle;
+}
+
+.actionbutton button {
+    height: 40px;
+    min-height: 40px;
+    min-width: 40px;
+    width: 40px;
+    padding: 0px;
+    -o-transition: all 250ms;
+    transition: all 260ms;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 100%;
+    background: initial;
+    margin: 2px;
+}
+
+.actionbutton button mat-icon {
+    font-size: 21px;
+    vertical-align: middle;
+}
+
+.actionbutton button:hover {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (max-width: 360px) {
+    .buttondiv {
+        text-align: center;
+    }
+}
+
+@media all and (min-width: 360px) and (max-width: 900px) {
+    .buttondiv {
+        text-align: center;
+    }
+    .buttondiv button {
+        width: 100%;
+    }
+}

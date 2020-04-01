@@ -1,0 +1,29 @@
+.topheadingstep {}
+
+.topheadingstep .stepperdiv {
+    width: 10px;
+    height: 10px;
+    background: linear-gradient( 155deg, #911FDD, #04BCB1, #007FD6);
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
+    margin: 11px;
+}
+
+.topheadingstep .heading h4 {
+    background: linear-gradient( 178deg, #911FDD, #04BCB1, #007FD6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.topheadingstep .imageandtext {
+    padding: 30px;
+}
+
+.topheadingstep .imageandtext .image {
+    text-align: center;
+    padding: 30px;
+}
+/* .topheadingstep .imageandtext span{
+    padding:20px;
+} */

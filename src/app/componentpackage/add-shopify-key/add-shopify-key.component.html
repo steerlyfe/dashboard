@@ -1,0 +1,37 @@
+<div class="container">
+    <mat-card class="example-card">
+  
+      <mat-card-content>
+        <form class="log-in" autocomplete="off">
+          <div class="floating-label">
+            <input placeholder="Consumer Key" type="text" id="consumer_key" autocomplete="off" name="consumer_key" required
+            [(ngModel)]="addeCommerceKey.consumer_key" >
+            <label for="consumer_key">Consumer Key</label>
+          </div>
+          <div class="floating-label">
+            <input placeholder="Consumer Secret" type="text" id="consumer_secret" autocomplete="off" name="consumer_secret" required
+            [(ngModel)]="addeCommerceKey.consumer_secret">
+            <label for="consumer_secret">Consumer Secret</label>
+          </div>
+          <div class="floating-label">
+            <input placeholder="Domain" type="text" id="domain" autocomplete="off" name="domain" required
+            [(ngModel)]="addeCommerceKey.domain">
+            <label for="domain">Domain</label>
+          </div>
+          <!-- <div class="floating-label">
+            <input placeholder="Email" type="text" id="email" autocomplete="off" name="email" required [(ngModel)]="addeCommerceKey.consumer_key">
+            <label for="email">Email</label>
+          </div> -->
+          
+    
+  
+  
+  
+    
+  
+          <button type="submit"  (click)="addKeyApiCall()">Add</button>
+        </form>
+  
+      </mat-card-content>
+    </mat-card>
+  </div>

@@ -1,0 +1,115 @@
+<div class="container">
+    <mat-card class="example-card" style="margin:5px;">
+        <mat-card-content>
+
+            <div class="orderid">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <h6> Order Id -</h6><span>{{orderId}}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row" style="float: right;">
+                            <h6> Order Status -</h6><span [ngStyle]="{color:getColor(orderstatus)}">{{orderstatus}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="orderdate">
+                    <div class="row">
+                        <h6> Order Date -</h6><span>{{orderdate}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="shippingaddress">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <h6> Customer Name -</h6><span>Avinash Kumar</span>
+                        </div>
+                        <div class="row">
+                            <h6> Contact Number -</h6><span>9877189895</span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div style=" float: right;">
+                            <h6>Shipping Address </h6>
+                            <span> #696 New Indira Colony</span><br>
+                            <span> Manimajra, Chnadigarh</span><br>
+                            <span>160101</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="productdiv">
+                <div class="card">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <div class="imageouterdiv"><img src="https://firebasestorage.googleapis.com/v0/b/steerlyfe-e2405.appspot.com/o/store-logo%2F1578978734599?alt=media&token=278b6731-af20-4682-9bd4-e2cc56bbee5f"
+                                    class="banner"></div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="productDetails">
+                                <h6>Hemp Pain Relief Cream (100mg)</h6>
+                                <span>Napworks</span><br>
+                                <span>$54</span>
+                            </div>
+                        </div>
+                        <div class="col-md-7">
+                            <!-- <div class="proccessdiv" style="    position: relative;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%,-50%);"> -->
+                              <ol class="ProgressBar">
+                                  
+                                    <li class="ProgressBar-step " [ngClass]="{'is-complete':orderStepactive}" id="orderstatus">
+                                      <svg class="ProgressBar-icon"><use xlink:href="#checkmark-bold"/>
+                                    </svg>
+                                    
+                                      <span class="ProgressBar-stepLabel">Ordered</span>
+                                      <!-- <div class="tooltip-toggle" aria-label="sample text" tabindex="0" id="myBar">10%</div> -->
+                                      <!-- <div class="tooltip">Your Progress</div> -->
+
+                                    </li>
+                                    <li class="ProgressBar-step " [ngClass]="{'is-complete':packedStepactive}" id="packedstatus">
+                                      <svg class="ProgressBar-icon"><use xlink:href="#checkmark-bold"/></svg>
+                                      <span class="ProgressBar-stepLabel">Packed</span>
+                                    </li>
+                                    <li class="ProgressBar-step " [ngClass]="{'is-complete':shippingStepactive}" id="shippedstatus">
+                                      <svg class="ProgressBar-icon"><use xlink:href="#checkmark-bold"/></svg>
+                                      <span class="ProgressBar-stepLabel">Shipped</span>
+                                    </li>
+                                    <li class="ProgressBar-step " [ngClass]="{'is-complete':deliverStepactive}" id="deliveredstatus">
+                                      <svg class="ProgressBar-icon"><use xlink:href="#checkmark-bold"/></svg>
+                                      <span class="ProgressBar-stepLabel">Delivered</span>
+                                    </li>
+                                  </ol>
+                               
+                            <!-- </div> -->
+                        </div>
+                        <!-- <div class="proccessdiv">
+                                <div class="progress">
+                                        <div class="progress-bar" role="progressbar" style="width: 15%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div class="progress-bar bg-info" role="progressbar" style="width: 20%" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
+                                      </div>
+                        </div> -->
+                      
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+
+ 
+
+        </mat-card-content>
+    </mat-card>
+</div>

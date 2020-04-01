@@ -1,0 +1,127 @@
+.buttondiv{
+    text-align: right;
+    padding:25px;
+}
+.buttondiv button:focus{
+  outline: unset;
+}
+
+.product_Name{
+    max-width: 126px;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.textalign{
+    text-align: center;
+}
+
+.table td , .table th {
+    vertical-align: middle;
+    text-align: center;
+    text-align: -webkit-center;
+}
+/* .row{
+    width:100%;
+    margin-left: unset;
+    margin-right: unset;
+    padding: 28px;
+}
+.mat-card-image {
+    width: calc(100% + 32px);
+    height: 200px;
+    margin: 0 -16px 16px -16px;
+}
+.mat-card-actions, .mat-card-content, .mat-card-subtitle {
+    display: block;
+    margin-bottom: 16px;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+}
+.col-lg-4{
+    margin-bottom: 40px;
+}
+.pagging button{
+    padding: 9px 23px;
+    margin:10px;
+}
+.mycard:hover{
+    box-shadow: 0 2px 8px 0px rgb(126, 46, 214), 0 2px 6px 0 rgb(3, 185, 178), 0 4px 17px 0 hsl(203, 100%, 41%);
+    cursor: pointer;
+}
+@media screen and (max-width: 360px) {
+    .buttondiv{
+        text-align: center;
+    }
+}
+@media all and (min-width: 360px) and (max-width: 900px) {
+    .buttondiv{
+        text-align: center;
+    }
+    .buttondiv  button{
+        width: 100%;
+    }
+} */
+
+
+
+.buttondiv{
+    text-align: right;
+    padding:25px;
+}
+.buttondiv button:focus{
+  outline: unset;
+}
+.imageouterdiv{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+.banner{
+    vertical-align: middle;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.storename{
+    text-transform: capitalize;
+}
+.table td, .table th {
+
+    vertical-align: middle;
+}
+.actionbutton  button{
+    height: 40px;
+    min-height: 40px;
+    min-width: 40px;
+    width: 40px;
+    padding: 0px;
+    -o-transition: all 250ms;
+    transition: all 260ms;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    border-radius: 100%;
+    background: initial;
+    margin: 2px;
+}
+.actionbutton button mat-icon{
+    font-size: 21px;
+    vertical-align: middle;
+}
+.actionbutton button:hover{
+    background: rgba(0,0,0,0.1);
+    
+}
+@media screen and (max-width: 360px) {
+    .buttondiv{
+        text-align: center;
+    }
+}
+@media all and (min-width: 360px) and (max-width: 900px) {
+    .buttondiv{
+        text-align: center;
+    }
+    .buttondiv  button{
+        width: 100%;
+    }
+}
